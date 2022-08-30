@@ -1,5 +1,4 @@
 export * from './create-rule-dto';
-export * from './create-test-dto';
 export * from './create-user-dto';
 export * from './daily-data-points-dto';
 export * from './exchange-token-dto';
@@ -11,5 +10,4 @@ export * from './rule';
 export * from './summary-stats-dto';
 export * from './sync-status-dto';
 export * from './update-rule-dto';
-export * from './update-test-dto';
 export * from './user';

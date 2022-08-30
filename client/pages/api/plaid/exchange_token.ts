@@ -9,8 +9,8 @@ export default async function handler(
 ) {
   try {
     const api = createDefaultAPI(req);
-    const response = await api.plaidOauthControllerExchangeToken(req.body);
-    res.json({});
+    await api.plaidOauthControllerExchangeToken(req.body);
+    res.status(200);
   } catch (err) {
     handleAPIError(res, err);
   }

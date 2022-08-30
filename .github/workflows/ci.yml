@@ -24,3 +24,12 @@ jobs:
 
       - name: Build Client
         run: cd client && yarn build
+
+      - name: Install Server Dependencies
+        run: cd server && yarn
+
+      - name: Lint Server
+        run: cd server && yarn lint
+
+      - name: Build Server
+        run: cd server && yarn build

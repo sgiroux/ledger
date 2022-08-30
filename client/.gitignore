@@ -37,13 +37,3 @@ next-env.d.ts
 
 # environment file
 .env
-
-# api-client specific files
-api-client/.swagger-codegen
-api-cleint/.gitignore
-api-client/.npmignore
-api-client/.swagger-codegen-ignore
-api-client/git_push.sh
-api-client/package.json
-api-client/README.md
-api-client/tsconfig.json

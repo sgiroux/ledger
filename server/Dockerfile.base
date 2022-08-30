@@ -1,0 +1,22 @@
+FROM node:18.7-alpine AS NEST_BUILDER
+
+# create the directory inside the container
+WORKDIR /app
+
+# Copy over dist folder
+COPY ./server ./
+
+# run yarn install in our local machine
+RUN yarn install --frozen-lockfile
+
+# build everything
+RUN yarn test 
+
+# build everything
+RUN yarn build
+
+# remove development dependencies
+RUN yarn install --production --ignore-scripts
+
+#Remove src and test folders
+RUN rm -rf src test

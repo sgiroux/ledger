@@ -32,7 +32,11 @@ export class SyncService {
     // create a background job.
     const createSyncJob = (jobName: string, userId: number) => {
       return async () => {
-        await this.sync(jobName, userId);
+        try {
+          await this.sync(jobName, userId);
+        } catch (err) {
+          this.logger.error(`Error running syncJob: ${err}`);
+        }
       };
     };
 

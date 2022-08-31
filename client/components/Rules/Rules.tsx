@@ -1,9 +1,7 @@
 import { Switch } from "@headlessui/react";
-import { PencilIcon } from "@heroicons/react/outline";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React from "react";
-import { unstable_batchedUpdates } from "react-dom";
 import useSWR from "swr";
 import { Rule } from "../../api-client/models/rule";
 import Loader from "../Loader";

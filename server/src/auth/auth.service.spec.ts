@@ -3,6 +3,8 @@ import { AppModule } from '../app.module';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmTestingModule } from '../utils/test-utils/type-orm-testing-module';
+import { UsersModule } from '../users/users.module';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -10,15 +12,16 @@ describe('AuthService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        AppModule,
+        ...TypeOrmTestingModule(),
         JwtModule.registerAsync({
           imports: [ConfigModule],
           useFactory: async (configService: ConfigService) => ({
             secret: configService.get('JWT_SECRET'),
-            signOptions: { expiresIn: '60m' },
+            signOptions: { expiresIn: '7d' },
           }),
           inject: [ConfigService],
         }),
+        UsersModule,
       ],
       providers: [AuthService],
     }).compile();

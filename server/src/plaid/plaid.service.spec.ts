@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../app.module';
+import { TypeOrmTestingModule } from '../utils/test-utils/type-orm-testing-module';
 import { PlaidClient } from './plaid.client';
 import { PlaidService } from './plaid.service';
 
@@ -8,7 +9,7 @@ describe('PlaidService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [...TypeOrmTestingModule()],
       providers: [PlaidService, PlaidClient],
     }).compile();
 

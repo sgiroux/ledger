@@ -59,7 +59,6 @@ import { Rule } from './rules/entities/rule.entity';
       isGlobal: true,
     }),
     ConfigModule.forRoot({
-      cache: true,
       isGlobal: true,
       validate: ConfigurationUtil.validateConfig,
     }),

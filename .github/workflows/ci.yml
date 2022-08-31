@@ -33,3 +33,6 @@ jobs:
 
       - name: Build Server
         run: cd server && yarn build
+
+      - name: Test Server
+        run: cd server && yarn test

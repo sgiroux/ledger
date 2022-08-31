@@ -1,8 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { AppModule } from '../app.module';
+import { RulesModule } from '../rules/rules.module';
+import { TypeOrmTestingModule } from '../utils/test-utils/type-orm-testing-module';
 import { PlaidTransaction } from './entities/plaid-transaction.entity';
 import { PlaidTransactionsController } from './plaid-transactions.controller';
+import { PlaidTransactionsModule } from './plaid-transactions.module';
 import { PlaidTransactionsService } from './plaid-transactions.service';
 
 describe('PlaidTransactionsController', () => {
@@ -10,11 +13,11 @@ describe('PlaidTransactionsController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [...TypeOrmTestingModule(), RulesModule],
       controllers: [PlaidTransactionsController],
       providers: [
         PlaidTransactionsService,
-        {
+        /*{
           provide: getRepositoryToken(PlaidTransaction),
           useValue: {
             find: jest.fn().mockResolvedValue([]),
@@ -28,7 +31,7 @@ describe('PlaidTransactionsController', () => {
             // we just make sure that their resolve is true to not crash
             delete: jest.fn().mockResolvedValue(true),
           },
-        },
+        },*/
       ],
     }).compile();
 

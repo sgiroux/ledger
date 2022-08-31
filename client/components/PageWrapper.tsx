@@ -1,25 +1,16 @@
 
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import {
-  BellIcon,
-  ChartBarIcon,
-  CogIcon,
-  HomeIcon,
-  MenuAlt2Icon,
-  XIcon,
-  ClipboardCheckIcon,
-  CreditCardIcon,
-  FolderIcon
-} from '@heroicons/react/outline'
+import { HomeIcon, FolderIcon, ClipboardIcon, WalletIcon, XMarkIcon, Bars3Icon} from '@heroicons/react/24/solid'
+import { BellIcon} from '@heroicons/react/24/outline'
+
 import Link from 'next/link'
-import { User } from '../api-client'
 import Image from 'next/image'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon},
   { name: 'Accounts', href: '/accounts', icon: FolderIcon},
-  { name: 'Rules', href: '/rules', icon: ClipboardCheckIcon},
+  { name: 'Rules', href: '/rules', icon: ClipboardIcon},
   /*{ name: 'Settings', href: '/link/sync', icon: CogIcon, current: false },
   { name: 'Reports', href: '/link/sync', icon: ChartBarIcon, current: false },*/
 
@@ -85,11 +76,12 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
                         onClick={() => setSidebarOpen(false)}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                       </button>
                     </div>
                   </Transition.Child>
                   <div className="flex-shrink-0 flex items-center px-4">
+                    <WalletIcon className="h-6 w-6"/>
                     {/*<Image
                       height={10}
                       layout="fill"
@@ -127,7 +119,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
                     <a href="#" className="flex-shrink-0 group block">
                       <div className="flex items-center">
                         <div>
-                          <CreditCardIcon className="inline-block h-10 w-10 rounded-full text-white"/>
+                          <XMarkIcon className="inline-block h-10 w-10 rounded-full text-white"/>
                           
                         </div>
                         <div className="ml-3">
@@ -152,6 +144,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
             <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+              <WalletIcon />
               {/*<Image
                 height={10}
                 layout="fill"
@@ -189,7 +182,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
               <a href="#" className="flex-shrink-0 group block">
                 <div className="flex items-center">
                   <div>
-                    <CreditCardIcon className="inline-block h-10 w-10 rounded-full text-white"/>
+                    <Bars3Icon className="inline-block h-10 w-10 rounded-full text-white"/>
                     
                   </div>
                   <div className="ml-3">
@@ -209,7 +202,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
-              <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">

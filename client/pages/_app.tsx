@@ -2,9 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head';
 import axios from 'axios';
-import { StrictMode } from 'react';
 import { SWRConfig } from 'swr';
-import { UserContext } from '../contexts/UserContext';
 
 
 

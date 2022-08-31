@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { SyncModule } from '../sync/sync.module';
 import { UsersModule } from '../users/users.module';
 import { TasksController } from './tasks.controller';

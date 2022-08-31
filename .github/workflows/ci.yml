@@ -12,6 +12,12 @@ jobs:
     name: Lint & Test Build
     runs-on: ubuntu-latest
 
+    env:
+      JWT_SECRET: jwt_secret
+      PLAID_CLIENT_ID: ${{ secrets.PLAID_CLIENT_ID }}
+      PLAID_SECRET: ${{ secrets.PLAID_SANDBOX_SECRET }}
+      PLAID_ENVIRONMENT: sandbox
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3

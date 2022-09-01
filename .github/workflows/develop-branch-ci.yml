@@ -1,0 +1,44 @@
+name: Develop Branch - CI
+on:
+  push:
+    branches:
+      - "develop"
+
+jobs:
+  test:
+    name: Lint & Test Build
+    runs-on: ubuntu-latest
+
+    env:
+      JWT_SECRET: jwt_secret
+      PLAID_CLIENT_ID: ${{ secrets.PLAID_CLIENT_ID }}
+      PLAID_SECRET: ${{ secrets.PLAID_SANDBOX_SECRET }}
+      PLAID_ENVIRONMENT: sandbox
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Client - Install Dependencies
+        run: cd client && yarn
+
+      - name: Client - Lint
+        run: cd client && yarn lint
+
+      - name: Client - Build
+        run: cd client && yarn build
+
+      - name: Server - Install Dependencies
+        run: cd server && yarn
+
+      - name: Server - Lint
+        run: cd server && yarn lint
+
+      - name: Server - Build
+        run: cd server && yarn build
+
+      - name: Server - Unit Tests
+        run: cd server && yarn test
+
+      - name: Server - E2E Tests
+        run: cd server && yarn test:e2e

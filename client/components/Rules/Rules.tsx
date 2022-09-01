@@ -20,15 +20,6 @@ const Rules:React.FC = () => {
   React.useEffect(() => {
     if (data) {
       setRules(data);
-      /*setRules([
-        {
-          name: 'Test',
-          operation: 'contains',
-          criteria: 'Invoice fora sfdsaf sdf sdf sdf sd sd',
-          isEnabled: true,
-          field: 'name'
-        }
-      ]);*/
     }
     
   }, [data]);
@@ -136,12 +127,20 @@ const Rules:React.FC = () => {
                       <dt className="sr-only">{rule.name}</dt>
                       <dd className="mt-1 truncate text-gray-700">{rule.field}</dd>
                       <dd className="mt-1 truncate text-gray-700">{rule.operation}</dd>
-                      <dd className="mt-1 truncate text-gray-500 sm:hidden">{rule.criteria}</dd>
+                      <dd className="mt-1 truncate text-gray-500 sm:hidden">
+                        <div className="truncate">
+                        {rule.criteria}
+                        </div>
+                      </dd>
                     </dl>
                   </td>
                   <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{rule.field}</td>
                   <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{rule.operation}</td>
-                  <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{rule.criteria}</td>
+                  <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                    <div className="max-w-[75px] truncate">
+                        {rule.criteria}
+                    </div>
+                  </td>
                   <td className="px-3 py-4 text-sm text-gray-500">
                     <Switch
                       checked={rule.isEnabled}

@@ -362,10 +362,11 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
         /**
          *
          * @param {number} limit
+         * @param {number} offset
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plaidTransactionsControllerSelectAll: function (limit, options) {
+        plaidTransactionsControllerSelectAll: function (limit, offset, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
@@ -373,6 +374,10 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
                     // verify required parameter 'limit' is not null or undefined
                     if (limit === null || limit === undefined) {
                         throw new base_1.RequiredError('limit', 'Required parameter limit was null or undefined when calling plaidTransactionsControllerSelectAll.');
+                    }
+                    // verify required parameter 'offset' is not null or undefined
+                    if (offset === null || offset === undefined) {
+                        throw new base_1.RequiredError('offset', 'Required parameter offset was null or undefined when calling plaidTransactionsControllerSelectAll.');
                     }
                     localVarPath = "/plaid/transactions";
                     localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -386,6 +391,50 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
                     if (limit !== undefined) {
                         localVarQueryParameter['limit'] = limit;
                     }
+                    if (offset !== undefined) {
+                        localVarQueryParameter['offset'] = offset;
+                    }
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
+         * @param {number} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plaidTransactionsControllerSelectById: function (id, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'id' is not null or undefined
+                    if (id === null || id === undefined) {
+                        throw new base_1.RequiredError('id', 'Required parameter id was null or undefined when calling plaidTransactionsControllerSelectById.');
+                    }
+                    localVarPath = "/plaid/transactions/{id}"
+                        .replace("{" + "id" + "}", encodeURIComponent(String(id)));
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
                     query = new URLSearchParams(localVarUrlObj.search);
                     for (key in localVarQueryParameter) {
                         query.set(key, localVarQueryParameter[key]);
@@ -973,15 +1022,40 @@ exports.DefaultApiFp = function (configuration) {
         /**
          *
          * @param {number} limit
+         * @param {number} offset
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plaidTransactionsControllerSelectAll: function (limit, options) {
+        plaidTransactionsControllerSelectAll: function (limit, offset, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).plaidTransactionsControllerSelectAll(limit, options)];
+                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).plaidTransactionsControllerSelectAll(limit, offset, options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         *
+         * @param {number} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plaidTransactionsControllerSelectById: function (id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).plaidTransactionsControllerSelectById(id, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1329,13 +1403,27 @@ exports.DefaultApiFactory = function (configuration, basePath, axios) {
         /**
          *
          * @param {number} limit
+         * @param {number} offset
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        plaidTransactionsControllerSelectAll: function (limit, options) {
+        plaidTransactionsControllerSelectAll: function (limit, offset, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.DefaultApiFp(configuration).plaidTransactionsControllerSelectAll(limit, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.DefaultApiFp(configuration).plaidTransactionsControllerSelectAll(limit, offset, options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         *
+         * @param {number} id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        plaidTransactionsControllerSelectById: function (id, options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, exports.DefaultApiFp(configuration).plaidTransactionsControllerSelectById(id, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1583,15 +1671,31 @@ var DefaultApi = /** @class */ (function (_super) {
     /**
      *
      * @param {number} limit
+     * @param {number} offset
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    DefaultApi.prototype.plaidTransactionsControllerSelectAll = function (limit, options) {
+    DefaultApi.prototype.plaidTransactionsControllerSelectAll = function (limit, offset, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.DefaultApiFp(this.configuration).plaidTransactionsControllerSelectAll(limit, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.DefaultApiFp(this.configuration).plaidTransactionsControllerSelectAll(limit, offset, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    DefaultApi.prototype.plaidTransactionsControllerSelectById = function (id, options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, exports.DefaultApiFp(this.configuration).plaidTransactionsControllerSelectById(id, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

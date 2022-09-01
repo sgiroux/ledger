@@ -5,6 +5,7 @@ import {
   Products,
   AccountsGetResponse,
   TransactionsSyncRequest,
+  CategoriesGetResponse,
 } from 'plaid';
 import axios, { AxiosError } from 'axios';
 
@@ -27,6 +28,22 @@ export class PlaidService {
       return err.response.data.error_code;
     } else {
       return err.toString();
+    }
+  }
+
+  async getCategories(): Promise<CategoriesGetResponse> {
+    try {
+      const response = await this.plaidClient.client.categoriesGet({});
+      return response.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        this.logger.error(
+          `Error retrieving accounts: ${this.extractErrorCode(
+            err,
+          )} - ${this.extractErrorMessage(err)}`,
+        );
+      }
+      throw err;
     }
   }
 

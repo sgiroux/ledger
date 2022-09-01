@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { DefaultApi } from '../api-client';
+import { logger } from './logger';
 
 class AnzuAPIError {
   private httpStatus: number;
@@ -26,6 +27,7 @@ class AnzuAPIError {
 }
 
 export const handleAPIError = (res: NextApiResponse, err: any) => {
+  logger.log(`An Error Has Occured: ${err}`);
   if (err instanceof AnzuAPIError) {
     res.status(err.getHttpStatus()).json(err.getError());
   } else {

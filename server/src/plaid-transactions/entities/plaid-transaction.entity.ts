@@ -48,6 +48,11 @@ export class PlaidTransaction {
   })
   categoryId: string | null;
 
+  @Column('simple-array', {
+    nullable: true,
+  })
+  category: string[] | null;
+
   @Column({
     nullable: true,
     type: 'text',

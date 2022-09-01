@@ -12,7 +12,7 @@ export class TasksService {
     private readonly usersService: UsersService,
   ) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_HOUR)
   async syncTransactions() {
     this.logger.debug('Scheduled Task: SyncTransactions Started');
     const users = await this.usersService.selectAll();

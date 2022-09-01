@@ -1,16 +1,17 @@
 
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { HomeIcon, FolderIcon, ClipboardIcon, WalletIcon, XMarkIcon, Bars3Icon} from '@heroicons/react/24/solid'
+import { GiftIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, FolderIcon, ClipboardDocumentCheckIcon,  WalletIcon, XMarkIcon, Bars3Icon, BanknotesIcon} from '@heroicons/react/24/solid'
 import { BellIcon} from '@heroicons/react/24/outline'
 
 import Link from 'next/link'
-import Image from 'next/image'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon},
   { name: 'Accounts', href: '/accounts', icon: FolderIcon},
-  { name: 'Rules', href: '/rules', icon: ClipboardIcon},
+  { name: 'Rules', href: '/rules', icon: ClipboardDocumentCheckIcon},
+  { name: 'Transactions', href: '/transactions', icon: BanknotesIcon},
   /*{ name: 'Settings', href: '/link/sync', icon: CogIcon, current: false },
   { name: 'Reports', href: '/link/sync', icon: ChartBarIcon, current: false },*/
 
@@ -27,7 +28,7 @@ function classNames(...classes: string[]) {
 
 export interface PageWrapperProps {
   children: React.ReactNode;
-  page: 'Dashboard' | 'Rules' | 'Accounts'
+  page: 'Dashboard' | 'Rules' | 'Accounts' | 'Transactions'
 }
 
 const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
@@ -81,7 +82,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
                     </div>
                   </Transition.Child>
                   <div className="flex-shrink-0 flex items-center px-4">
-                    <WalletIcon className="h-6 w-6"/>
+                    <WalletIcon className="h-8 w-8 text-indigo-600" />
+                    <div className="inline-block ml-3 font-bold text-xlg text-white">LEDGER</div>
                     {/*<Image
                       height={10}
                       layout="fill"
@@ -119,7 +121,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
                     <a href="#" className="flex-shrink-0 group block">
                       <div className="flex items-center">
                         <div>
-                          <XMarkIcon className="inline-block h-10 w-10 rounded-full text-white"/>
+                          <GiftIcon className="inline-block h-10 w-10 rounded-full text-white"/>
                           
                         </div>
                         <div className="ml-3">
@@ -144,7 +146,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
             <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-              <WalletIcon />
+              <WalletIcon className="h-8 w-8 text-indigo-600" />
+              <div className="inline-block ml-3 font-normal text-xlg text-white">LEDGER</div>
               {/*<Image
                 height={10}
                 layout="fill"
@@ -182,7 +185,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
               <a href="#" className="flex-shrink-0 group block">
                 <div className="flex items-center">
                   <div>
-                    <Bars3Icon className="inline-block h-10 w-10 rounded-full text-white"/>
+                    <GiftIcon className="inline-block h-10 w-10 rounded-full text-white"/>
                     
                   </div>
                   <div className="ml-3">

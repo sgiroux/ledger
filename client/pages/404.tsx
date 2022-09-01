@@ -1,39 +1,37 @@
-import Head from "next/head";
+import { WalletIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useRouter } from 'next/router'
 
 
 const NotFoundPage:React.FC = () => {
-  const router = useRouter()
-
-  const navigateToHome = () => {
-    router.push("/");
-  }
-
   return (
-    <div>
-
-      <div className="bg-white py-6 sm:py-8 lg:py-12">
-        <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
-          <div className="flex flex-col items-center">
-            <a href="#" onClick={navigateToHome} className="inline-flex items-center text-black-800 text-2xl md:text-3xl font-bold gap-2.5 mb-8" aria-label="logo">
-              <svg width="95" height="94" viewBox="0 0 95 94" className="w-6 h-auto text-indigo-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M96 0V47L48 94H0V47L48 0H96Z" />
-              </svg>
-
-              Anzu
-            </a>
-
-            <p className="text-indigo-500 text-sm md:text-base font-semibold uppercase mb-4">That’s a 404</p>
-            <h1 className="text-gray-800 text-2xl md:text-3xl font-bold text-center mb-2">Page not found</h1>
-
-            <p className="max-w-screen-md text-gray-500 md:text-lg text-center mb-12">The page you’re looking for doesn’t exist.</p>
-
-            <a href="#" onClick={navigateToHome} className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Go home</a>
+    <div className="flex min-h-full flex-col bg-white pt-16 pb-12">
+        <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-shrink-0 justify-center">
+            <Link href="/">
+              <a className="inline-flex">
+                <span className="sr-only">LEDGER</span>
+                <WalletIcon className="h-20 w-20 text-indigo-600" />
+              </a>
+            </Link>
           </div>
-        </div>
+          <div className="py-16">
+            <div className="text-center">
+              <p className="text-base font-semibold text-indigo-600">404</p>
+              <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Page not found.</h1>
+              <p className="mt-2 text-base text-gray-500">Sorry, we couldn&apos;t find the page you&apos;re looking for.</p>
+              <div className="mt-6">
+                <Link href="/">
+                  <a className="text-base font-medium text-indigo-600 hover:text-indigo-500">
+                    Go back home
+                    <span aria-hidden="true"> &rarr;</span>
+                  </a>
+                </Link>
+                
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
-    </div>
   )
 }
 

@@ -2,21 +2,18 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, VersioningType } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { TypeOrmTestingModule } from '../src/utils/test-utils/type-orm-testing-module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [...TypeOrmTestingModule()],
     }).compile();
 
     app = moduleFixture.createNestApplication();
 
-    app.enableVersioning({
-      type: VersioningType.HEADER,
-      header: 'X-API-Version',
-    });
     await app.init();
   });
 
@@ -25,31 +22,6 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET) V1', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .set({
-        'X-API-Version': '1',
-      })
-      .expect(200)
-      .expect('1');
-  });
-
-  it('/ (GET) V2', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .set({
-        'X-API-Version': '2',
-      })
-      .expect(200)
-      .expect('2');
-  });
-
-  it('/ (GET) No Version', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .set({
-        'X-API-Version': '3',
-      })
-      .expect(404);
+    return request(app.getHttpServer()).get('/').expect(404);
   });
 });

@@ -5,6 +5,8 @@ import {
   Req,
   Query,
   DefaultValuePipe,
+  Param,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
@@ -23,11 +25,21 @@ export class PlaidTransactionsController {
   async selectAll(
     @Req() request: APIRequest,
     @Query('limit', new DefaultValuePipe(100)) limit: number,
+    @Query('offset', new DefaultValuePipe(0)) offset: number,
   ) {
     return await this.plaidTransactionsService.selectAllByUser(
       request.user,
       true,
       limit,
+      offset,
     );
+  }
+
+  @Get(':id')
+  async selectById(
+    @Req() request: APIRequest,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return await this.plaidTransactionsService.selectById(request.user, id);
   }
 }

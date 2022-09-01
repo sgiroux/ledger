@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { User } from '../users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PlaidTransaction } from './entities/plaid-transaction.entity';
@@ -15,7 +15,33 @@ export class PlaidTransactionsService {
     private rulesService: RulesService,
   ) {}
 
-  async selectAllByUser(user: User, applyFilters: boolean, limit?: number) {
+  async selectById(user: User, id: number) {
+    const transaction = await this.plaidTransactionsRepository.findOne({
+      where: {
+        id: id,
+        plaidAccount: {
+          plaidItem: {
+            user: {
+              id: user.id,
+            },
+          },
+        },
+      },
+    });
+
+    if (!transaction) {
+      throw new NotFoundException();
+    }
+
+    return transaction;
+  }
+
+  async selectAllByUser(
+    user: User,
+    applyFilters: boolean,
+    limit?: number,
+    offset?: number,
+  ) {
     const transactions = await this.plaidTransactionsRepository.find({
       relations: {
         plaidAccount: {

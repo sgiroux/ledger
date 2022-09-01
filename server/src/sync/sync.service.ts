@@ -68,12 +68,19 @@ export class SyncService {
   private async processModifiedTransactions(
     entityManager: EntityManager,
     remoteTransactions: Array<Transaction>,
+    plaidAccountIdToAccount: Map<any, any>, //TODO: Make this more strongly types
   ) {
     this.logger.debug(
       `Processing modified transactions. ${remoteTransactions.length} records`,
     );
 
-    remoteTransactions.forEach(async (remotePlaidTransaction) => {
+    // Remove transactions for accounts we don't know about.
+    const filteredRemoteTransactions = remoteTransactions.filter(
+      (remoteTransaction) =>
+        plaidAccountIdToAccount.get(remoteTransaction.account_id) !== undefined,
+    );
+
+    filteredRemoteTransactions.forEach(async (remotePlaidTransaction) => {
       const plaidTransactions = await entityManager.find(PlaidTransaction, {
         where: {
           transactionId: remotePlaidTransaction.transaction_id,
@@ -88,6 +95,13 @@ export class SyncService {
           remotePlaidTransaction.iso_currency_code;
         plaidTransaction.name = remotePlaidTransaction.name;
         plaidTransaction.pending = remotePlaidTransaction.pending;
+        plaidTransaction.categoryId = remotePlaidTransaction.category_id;
+        plaidTransaction.transactionId = remotePlaidTransaction.transaction_id;
+        plaidTransaction.paymentChannel =
+          remotePlaidTransaction.payment_channel;
+        plaidTransaction.merchantName =
+          remotePlaidTransaction.merchant_name || null;
+        plaidTransaction.category = remotePlaidTransaction.category;
 
         await entityManager.save(plaidTransaction);
       });
@@ -118,7 +132,13 @@ export class SyncService {
       `Processing added transactions. ${remoteTransactions.length} records`,
     );
 
-    const plaidTransactions = remoteTransactions.map(
+    // Remove transactions for accounts we don't know about.
+    const filteredRemoteTransactions = remoteTransactions.filter(
+      (remoteTransaction) =>
+        plaidAccountIdToAccount.get(remoteTransaction.account_id) !== undefined,
+    );
+
+    const plaidTransactions = filteredRemoteTransactions.map(
       (remotePlaidTransaction) => {
         const plaidTransaction = new PlaidTransaction();
         plaidTransaction.amount = remotePlaidTransaction.amount;
@@ -134,8 +154,10 @@ export class SyncService {
         plaidTransaction.merchantName =
           remotePlaidTransaction.merchant_name || null;
         plaidTransaction.categoryId = remotePlaidTransaction.category_id;
+        plaidTransaction.paymentChannel =
+          remotePlaidTransaction.payment_channel;
+        plaidTransaction.category = remotePlaidTransaction.category;
 
-        remotePlaidTransaction.payment_channel;
         plaidTransaction.plaidAccount = plaidAccountIdToAccount.get(
           remotePlaidTransaction.account_id,
         );
@@ -197,6 +219,7 @@ export class SyncService {
             await this.processModifiedTransactions(
               manager,
               syncTransactionsResponse.modified,
+              plaidAccountIdToAccount,
             );
 
             plaidItem.transactionSyncCursor =

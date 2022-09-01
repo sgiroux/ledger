@@ -2,7 +2,6 @@ import React from "react";
 import {
   AreaChart,
   Area,
-  Tooltip,
   ResponsiveContainer
 } from "recharts";
 import { DailyDataPointsDTO } from "../../api-client/models/daily-data-points-dto";

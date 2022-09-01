@@ -77,10 +77,18 @@ export declare const DefaultApiAxiosParamCreator: (configuration?: Configuration
     /**
      *
      * @param {number} limit
+     * @param {number} offset
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    plaidTransactionsControllerSelectAll: (limit: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    plaidTransactionsControllerSelectAll: (limit: number, offset: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    plaidTransactionsControllerSelectById: (id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
     /**
      *
      * @param {CreateRuleDTO} body
@@ -202,10 +210,18 @@ export declare const DefaultApiFp: (configuration?: Configuration) => {
     /**
      *
      * @param {number} limit
+     * @param {number} offset
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    plaidTransactionsControllerSelectAll(limit: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<PlaidTransaction>>>>;
+    plaidTransactionsControllerSelectAll(limit: number, offset: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<PlaidTransaction>>>>;
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    plaidTransactionsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PlaidTransaction>>>;
     /**
      *
      * @param {CreateRuleDTO} body
@@ -327,10 +343,18 @@ export declare const DefaultApiFactory: (configuration?: Configuration, basePath
     /**
      *
      * @param {number} limit
+     * @param {number} offset
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    plaidTransactionsControllerSelectAll(limit: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidTransaction>>>;
+    plaidTransactionsControllerSelectAll(limit: number, offset: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidTransaction>>>;
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    plaidTransactionsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<PlaidTransaction>>;
     /**
      *
      * @param {CreateRuleDTO} body
@@ -461,11 +485,20 @@ export declare class DefaultApi extends BaseAPI {
     /**
      *
      * @param {number} limit
+     * @param {number} offset
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    plaidTransactionsControllerSelectAll(limit: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidTransaction>>>;
+    plaidTransactionsControllerSelectAll(limit: number, offset: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidTransaction>>>;
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    plaidTransactionsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<PlaidTransaction>>;
     /**
      *
      * @param {CreateRuleDTO} body

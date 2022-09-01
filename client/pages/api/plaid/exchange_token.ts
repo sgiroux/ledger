@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createDefaultAPI, handleAPIError } from '../../../utils/api-utils';
-import { ExchangeTokenDTO } from '../../../api-client';
 
 export default async function handler(
   req: NextApiRequest,

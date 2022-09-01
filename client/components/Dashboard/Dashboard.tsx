@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 import { SummaryStatsDTO } from '../../api-client/models/summary-stats-dto';
 import Loader from '../Loader';
+import TransactionList from '../TransactionList';
 import NoData from './NoData';
 import Stats from './Stats'
-import TransactionList from './TransactionList/TransactionList';
 
 const Chart = dynamic(() => import('./Chart'), {
   ssr: false

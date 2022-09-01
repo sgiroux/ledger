@@ -1,10 +1,10 @@
 
 
 import { CalendarIcon, ShoppingBagIcon, ChevronRightIcon, BuildingOfficeIcon  } from '@heroicons/react/24/solid'
-import { PlaidTransaction } from '../../../api-client'
-import DateFormat from '../../DateFormat';
-import CurrencyFormat from '../../CurrencyFormat';
 import Link from 'next/link';
+import { PlaidTransaction } from '../api-client';
+import CurrencyFormat from './CurrencyFormat';
+import DateFormat from './DateFormat';
 
 export interface TransactionListProps {
   transactions: PlaidTransaction[];
@@ -39,10 +39,10 @@ const TransactionList: React.FC<TransactionListProps> = ({transactions}) => {
                     <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
                       <div className="flex space-x-0 overflow-hidden">
                         
-                        {/* This should be categories. Would be neat to see */}
+                        {/* This should be categories. Would be neat to see 
                         <ShoppingBagIcon className="text-indigo-600 text-white inline-block h-6 w-6 rounded-full ring-2 ring-white"/>
                         <BuildingOfficeIcon className="text-indigo-600 text-white inline-block h-6 w-6 rounded-full ring-2 ring-white"/>
-                        
+                        */}
                       </div>
                     </div>
                   </div>

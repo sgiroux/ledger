@@ -17,58 +17,58 @@ import { PlaidTransaction } from './plaid-transaction';
  * @interface PlaidAccount
  */
 export interface PlaidAccount {
-    /**
-     *
-     * @type {number}
-     * @memberof PlaidAccount
-     */
-    id: number;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidAccount
-     */
-    accountId: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidAccount
-     */
-    mask: string | null;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidAccount
-     */
-    name: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidAccount
-     */
-    officialName: string | null;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidAccount
-     */
-    subtype: string | null;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidAccount
-     */
-    type: string;
-    /**
-     *
-     * @type {PlaidItem}
-     * @memberof PlaidAccount
-     */
-    plaidItem: PlaidItem;
-    /**
-     *
-     * @type {Array<PlaidTransaction>}
-     * @memberof PlaidAccount
-     */
-    plaidTransactions: Array<PlaidTransaction>;
+  /**
+   *
+   * @type {number}
+   * @memberof PlaidAccount
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidAccount
+   */
+  accountId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidAccount
+   */
+  mask: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidAccount
+   */
+  name: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidAccount
+   */
+  officialName: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidAccount
+   */
+  subtype: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidAccount
+   */
+  type: string;
+  /**
+   *
+   * @type {PlaidItem}
+   * @memberof PlaidAccount
+   */
+  plaidItem: PlaidItem;
+  /**
+   *
+   * @type {Array<PlaidTransaction>}
+   * @memberof PlaidAccount
+   */
+  plaidTransactions: Array<PlaidTransaction>;
 }

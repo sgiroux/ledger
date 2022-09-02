@@ -18,7 +18,7 @@ export class AuthController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Body() loginRequestDTO: LoginRequestDTO,
   ) {
-    return this.authService.login(req.user);
+    return await this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)

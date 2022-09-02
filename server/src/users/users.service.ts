@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDTO } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
@@ -33,23 +33,7 @@ export class UsersService {
     });
   }
 
-  async getDefaultUser(): Promise<User | null> {
-    return await this.usersRepository.findOne({
-      where: {
-        id: 1,
-      },
-    });
-  }
-
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const defaultUser = await this.getDefaultUser();
-
-    if (defaultUser) {
-      throw new BadRequestException(
-        'You cannot have more than one default user',
-      );
-    }
-
+  async create(createUserDto: CreateUserDTO): Promise<User> {
     // We need to hash the password accordingly prior to saving
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     createUserDto.password = hashedPassword;

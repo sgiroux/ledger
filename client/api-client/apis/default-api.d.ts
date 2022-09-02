@@ -12,8 +12,9 @@
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 import { RequestArgs, BaseAPI } from '../base';
+import { AccessDTO } from '../models';
 import { CreateRuleDTO } from '../models';
-import { CreateUserDto } from '../models';
+import { CreateUserDTO } from '../models';
 import { ExchangeTokenDTO } from '../models';
 import { LoginRequestDTO } from '../models';
 import { PlaidAccount } from '../models';
@@ -21,406 +22,651 @@ import { PlaidTransaction } from '../models';
 import { Rule } from '../models';
 import { SummaryStatsDTO } from '../models';
 import { SyncStatusDTO } from '../models';
+import { SystemStatusDTO } from '../models';
 import { UpdateRuleDTO } from '../models';
-import { User } from '../models';
 /**
  * DefaultApi - axios parameter creator
  * @export
  */
-export declare const DefaultApiAxiosParamCreator: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {LoginRequestDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerLogin: (body: LoginRequestDTO, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerMe: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerDelete: (id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerSelectAll: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerSelectById: (id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidOauthControllerCreateLinkToken: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {ExchangeTokenDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidOauthControllerExchangeToken: (body: ExchangeTokenDTO, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {number} limit
-     * @param {number} offset
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidTransactionsControllerSelectAll: (limit: number, offset: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidTransactionsControllerSelectById: (id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {CreateRuleDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerCreate: (body: CreateRuleDTO, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerDelete: (id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerSelectAll: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerSelectById: (id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {UpdateRuleDTO} body
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerUpdate: (body: UpdateRuleDTO, id: number, options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statsControllerSummary: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    syncControllerStart: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    syncControllerStatus: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    tasksControllerSyncTransactions: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
-    /**
-     *
-     * @param {CreateUserDto} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    usersControllerCreate: (body: CreateUserDto, options?: AxiosRequestConfig) => Promise<RequestArgs>;
+export declare const DefaultApiAxiosParamCreator: (
+  configuration?: Configuration,
+) => {
+  /**
+   *
+   * @param {LoginRequestDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  authControllerLogin: (
+    body: LoginRequestDTO,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  authControllerMe: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerDelete: (
+    id: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerSelectAll: (
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerSelectById: (
+    id: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidOauthControllerCreateLinkToken: (
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {ExchangeTokenDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidOauthControllerExchangeToken: (
+    body: ExchangeTokenDTO,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {number} limit
+   * @param {number} offset
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidTransactionsControllerSelectAll: (
+    limit: number,
+    offset: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidTransactionsControllerSelectById: (
+    id: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {CreateRuleDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerCreate: (
+    body: CreateRuleDTO,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerDelete: (
+    id: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerSelectAll: (
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerSelectById: (
+    id: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {UpdateRuleDTO} body
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerUpdate: (
+    body: UpdateRuleDTO,
+    id: number,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  statsControllerSummary: (
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  syncControllerStart: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  syncControllerStatus: (options?: AxiosRequestConfig) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {CreateUserDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  systemControllerInitialize: (
+    body: CreateUserDTO,
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  systemControllerStatus: (
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  tasksControllerStartSync: (
+    options?: AxiosRequestConfig,
+  ) => Promise<RequestArgs>;
 };
 /**
  * DefaultApi - functional programming interface
  * @export
  */
 export declare const DefaultApiFp: (configuration?: Configuration) => {
-    /**
-     *
-     * @param {LoginRequestDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerLogin(body: LoginRequestDTO, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerMe(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerDelete(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerSelectAll(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<PlaidAccount>>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PlaidAccount>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidOauthControllerCreateLinkToken(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>>;
-    /**
-     *
-     * @param {ExchangeTokenDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidOauthControllerExchangeToken(body: ExchangeTokenDTO, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
-    /**
-     *
-     * @param {number} limit
-     * @param {number} offset
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidTransactionsControllerSelectAll(limit: number, offset: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<PlaidTransaction>>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidTransactionsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<PlaidTransaction>>>;
-    /**
-     *
-     * @param {CreateRuleDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerCreate(body: CreateRuleDTO, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Rule>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerDelete(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerSelectAll(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Rule>>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Rule>>>;
-    /**
-     *
-     * @param {UpdateRuleDTO} body
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerUpdate(body: UpdateRuleDTO, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statsControllerSummary(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SummaryStatsDTO>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    syncControllerStart(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    syncControllerStatus(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SyncStatusDTO>>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    tasksControllerSyncTransactions(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>>;
-    /**
-     *
-     * @param {CreateUserDto} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    usersControllerCreate(body: CreateUserDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<User>>>;
+  /**
+   *
+   * @param {LoginRequestDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  authControllerLogin(
+    body: LoginRequestDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<AccessDTO>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  authControllerMe(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>
+  >;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerDelete(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerSelectAll(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<Array<PlaidAccount>>>
+  >;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<PlaidAccount>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidOauthControllerCreateLinkToken(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>
+  >;
+  /**
+   *
+   * @param {ExchangeTokenDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidOauthControllerExchangeToken(
+    body: ExchangeTokenDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>
+  >;
+  /**
+   *
+   * @param {number} limit
+   * @param {number} offset
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidTransactionsControllerSelectAll(
+    limit: number,
+    offset: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<Array<PlaidTransaction>>>
+  >;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidTransactionsControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<PlaidTransaction>>
+  >;
+  /**
+   *
+   * @param {CreateRuleDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerCreate(
+    body: CreateRuleDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Rule>>
+  >;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerDelete(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerSelectAll(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<Array<Rule>>>
+  >;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Rule>>
+  >;
+  /**
+   *
+   * @param {UpdateRuleDTO} body
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerUpdate(
+    body: UpdateRuleDTO,
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  statsControllerSummary(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<SummaryStatsDTO>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  syncControllerStart(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  syncControllerStatus(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<SyncStatusDTO>>
+  >;
+  /**
+   *
+   * @param {CreateUserDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  systemControllerInitialize(
+    body: CreateUserDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<AccessDTO>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  systemControllerStatus(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (
+      axios?: AxiosInstance,
+      basePath?: string,
+    ) => Promise<AxiosResponse<SystemStatusDTO>>
+  >;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  tasksControllerStartSync(
+    options?: AxiosRequestConfig,
+  ): Promise<
+    (axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>
+  >;
 };
 /**
  * DefaultApi - factory interface
  * @export
  */
-export declare const DefaultApiFactory: (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) => {
-    /**
-     *
-     * @param {LoginRequestDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerLogin(body: LoginRequestDTO, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    authControllerMe(options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerDelete(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerSelectAll(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidAccount>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidAccountsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<PlaidAccount>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidOauthControllerCreateLinkToken(options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-    /**
-     *
-     * @param {ExchangeTokenDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidOauthControllerExchangeToken(body: ExchangeTokenDTO, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {number} limit
-     * @param {number} offset
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidTransactionsControllerSelectAll(limit: number, offset: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidTransaction>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    plaidTransactionsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<PlaidTransaction>>;
-    /**
-     *
-     * @param {CreateRuleDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerCreate(body: CreateRuleDTO, options?: AxiosRequestConfig): Promise<AxiosResponse<Rule>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerDelete(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerSelectAll(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Rule>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Rule>>;
-    /**
-     *
-     * @param {UpdateRuleDTO} body
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    rulesControllerUpdate(body: UpdateRuleDTO, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    statsControllerSummary(options?: AxiosRequestConfig): Promise<AxiosResponse<SummaryStatsDTO>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    syncControllerStart(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    syncControllerStatus(options?: AxiosRequestConfig): Promise<AxiosResponse<SyncStatusDTO>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    tasksControllerSyncTransactions(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {CreateUserDto} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    usersControllerCreate(body: CreateUserDto, options?: AxiosRequestConfig): Promise<AxiosResponse<User>>;
+export declare const DefaultApiFactory: (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance,
+) => {
+  /**
+   *
+   * @param {LoginRequestDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  authControllerLogin(
+    body: LoginRequestDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<AccessDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  authControllerMe(options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerDelete(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerSelectAll(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Array<PlaidAccount>>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidAccountsControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<PlaidAccount>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidOauthControllerCreateLinkToken(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<any>>;
+  /**
+   *
+   * @param {ExchangeTokenDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidOauthControllerExchangeToken(
+    body: ExchangeTokenDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {number} limit
+   * @param {number} offset
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidTransactionsControllerSelectAll(
+    limit: number,
+    offset: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Array<PlaidTransaction>>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  plaidTransactionsControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<PlaidTransaction>>;
+  /**
+   *
+   * @param {CreateRuleDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerCreate(
+    body: CreateRuleDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Rule>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerDelete(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerSelectAll(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Array<Rule>>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Rule>>;
+  /**
+   *
+   * @param {UpdateRuleDTO} body
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  rulesControllerUpdate(
+    body: UpdateRuleDTO,
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<any>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  statsControllerSummary(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<SummaryStatsDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  syncControllerStart(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  syncControllerStatus(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<SyncStatusDTO>>;
+  /**
+   *
+   * @param {CreateUserDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  systemControllerInitialize(
+    body: CreateUserDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<AccessDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  systemControllerStatus(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<SystemStatusDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   */
+  tasksControllerStartSync(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
 };
 /**
  * DefaultApi - object-oriented interface
@@ -429,150 +675,208 @@ export declare const DefaultApiFactory: (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export declare class DefaultApi extends BaseAPI {
-    /**
-     *
-     * @param {LoginRequestDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    authControllerLogin(body: LoginRequestDTO, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    authControllerMe(options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidAccountsControllerDelete(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidAccountsControllerSelectAll(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidAccount>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidAccountsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<PlaidAccount>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidOauthControllerCreateLinkToken(options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-    /**
-     *
-     * @param {ExchangeTokenDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidOauthControllerExchangeToken(body: ExchangeTokenDTO, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {number} limit
-     * @param {number} offset
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidTransactionsControllerSelectAll(limit: number, offset: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<PlaidTransaction>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    plaidTransactionsControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<PlaidTransaction>>;
-    /**
-     *
-     * @param {CreateRuleDTO} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    rulesControllerCreate(body: CreateRuleDTO, options?: AxiosRequestConfig): Promise<AxiosResponse<Rule>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    rulesControllerDelete(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    rulesControllerSelectAll(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Rule>>>;
-    /**
-     *
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    rulesControllerSelectById(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Rule>>;
-    /**
-     *
-     * @param {UpdateRuleDTO} body
-     * @param {number} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    rulesControllerUpdate(body: UpdateRuleDTO, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    statsControllerSummary(options?: AxiosRequestConfig): Promise<AxiosResponse<SummaryStatsDTO>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    syncControllerStart(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    syncControllerStatus(options?: AxiosRequestConfig): Promise<AxiosResponse<SyncStatusDTO>>;
-    /**
-     *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    tasksControllerSyncTransactions(options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-    /**
-     *
-     * @param {CreateUserDto} body
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    usersControllerCreate(body: CreateUserDto, options?: AxiosRequestConfig): Promise<AxiosResponse<User>>;
+  /**
+   *
+   * @param {LoginRequestDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  authControllerLogin(
+    body: LoginRequestDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<AccessDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  authControllerMe(options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidAccountsControllerDelete(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidAccountsControllerSelectAll(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Array<PlaidAccount>>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidAccountsControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<PlaidAccount>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidOauthControllerCreateLinkToken(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<any>>;
+  /**
+   *
+   * @param {ExchangeTokenDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidOauthControllerExchangeToken(
+    body: ExchangeTokenDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {number} limit
+   * @param {number} offset
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidTransactionsControllerSelectAll(
+    limit: number,
+    offset: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Array<PlaidTransaction>>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  plaidTransactionsControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<PlaidTransaction>>;
+  /**
+   *
+   * @param {CreateRuleDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  rulesControllerCreate(
+    body: CreateRuleDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Rule>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  rulesControllerDelete(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  rulesControllerSelectAll(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Array<Rule>>>;
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  rulesControllerSelectById(
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<Rule>>;
+  /**
+   *
+   * @param {UpdateRuleDTO} body
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  rulesControllerUpdate(
+    body: UpdateRuleDTO,
+    id: number,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<any>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  statsControllerSummary(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<SummaryStatsDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  syncControllerStart(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  syncControllerStatus(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<SyncStatusDTO>>;
+  /**
+   *
+   * @param {CreateUserDTO} body
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  systemControllerInitialize(
+    body: CreateUserDTO,
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<AccessDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  systemControllerStatus(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<SystemStatusDTO>>;
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  tasksControllerStartSync(
+    options?: AxiosRequestConfig,
+  ): Promise<AxiosResponse<void>>;
 }

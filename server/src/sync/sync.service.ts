@@ -236,7 +236,7 @@ export class SyncService {
       this.schedulerRegistry.deleteTimeout(jobName);
 
       this.logger.debug(`${jobName} deleting job from cache`);
-      this.cacheManager.del(jobName);
+      await this.cacheManager.del(jobName);
     }
   }
 }

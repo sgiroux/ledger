@@ -1,4 +1,3 @@
-import { PlaidItem } from '../../plaid-items/entities/plaid-item.entity';
 import {
   Column,
   Entity,
@@ -6,6 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { PlaidItem } from '../../plaid-items/entities/plaid-item.entity';
 import { PlaidTransaction } from '../../plaid-transactions/entities/plaid-transaction.entity';
 
 @Entity()

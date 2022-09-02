@@ -2,6 +2,7 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "ms-azuretools.vscode-docker",
-    "chrisbibby.hide-node-modules"
+    "chrisbibby.hide-node-modules",
+    "bradlc.vscode-tailwindcss"
   ]
 }

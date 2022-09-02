@@ -15,16 +15,16 @@
  * @interface LoginRequestDTO
  */
 export interface LoginRequestDTO {
-    /**
-     *
-     * @type {string}
-     * @memberof LoginRequestDTO
-     */
-    email: string;
-    /**
-     *
-     * @type {string}
-     * @memberof LoginRequestDTO
-     */
-    password: string;
+  /**
+   *
+   * @type {string}
+   * @memberof LoginRequestDTO
+   */
+  email: string;
+  /**
+   *
+   * @type {string}
+   * @memberof LoginRequestDTO
+   */
+  password: string;
 }

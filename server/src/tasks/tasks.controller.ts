@@ -7,8 +7,8 @@ import { TasksService } from './tasks.service';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  @Get('syncTransactions')
-  async syncTransactions() {
+  @Get('startSync')
+  async startSync() {
     this.tasksService.syncTransactions();
   }
 }

@@ -12,31 +12,19 @@
 /**
  *
  * @export
- * @interface CreateUserDto
+ * @interface CreateUserDTO
  */
-export interface CreateUserDto {
-    /**
-     *
-     * @type {string}
-     * @memberof CreateUserDto
-     */
-    email: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateUserDto
-     */
-    firstName: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateUserDto
-     */
-    lastName: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateUserDto
-     */
-    password: string;
+export interface CreateUserDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof CreateUserDTO
+   */
+  email: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateUserDTO
+   */
+  password: string;
 }

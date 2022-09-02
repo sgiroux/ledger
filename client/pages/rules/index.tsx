@@ -17,7 +17,7 @@ const RulesPage:React.FC = ({user}: InferGetServerSidePropsType<typeof getServer
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const user = await getUserSSR();
+  const user = await getUserSSR(context.req.cookies);
   if (!user) {
     return {
       redirect: {

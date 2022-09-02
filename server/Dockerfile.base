@@ -3,7 +3,7 @@ FROM node:18.7-alpine AS NEST_BUILDER
 # create the directory inside the container
 WORKDIR /app
 
-# Copy over dist folder
+# Copy over server folder
 COPY ./server ./
 
 # run yarn install in our local machine
@@ -18,5 +18,5 @@ RUN yarn build
 # remove development dependencies
 RUN yarn install --production --ignore-scripts
 
-#Remove src and test folders
-RUN rm -rf src test
+#Remove src, test, and config folders if they exist
+RUN rm -rf src test config

@@ -17,46 +17,46 @@ import { PlaidTransaction } from './plaid-transaction';
  * @interface SummaryStatsDTO
  */
 export interface SummaryStatsDTO {
-    /**
-     *
-     * @type {number}
-     * @memberof SummaryStatsDTO
-     */
-    numRules: number;
-    /**
-     *
-     * @type {number}
-     * @memberof SummaryStatsDTO
-     */
-    numAccounts: number;
-    /**
-     *
-     * @type {number}
-     * @memberof SummaryStatsDTO
-     */
-    totalSpend: number;
-    /**
-     *
-     * @type {string}
-     * @memberof SummaryStatsDTO
-     */
-    costliestDate?: string;
-    /**
-     *
-     * @type {PlaidTransaction}
-     * @memberof SummaryStatsDTO
-     */
-    largestTransaction?: PlaidTransaction;
-    /**
-     *
-     * @type {Array<PlaidTransaction>}
-     * @memberof SummaryStatsDTO
-     */
-    transactions: Array<PlaidTransaction>;
-    /**
-     *
-     * @type {Array<DailyDataPointsDTO>}
-     * @memberof SummaryStatsDTO
-     */
-    dailyDataPoints: Array<DailyDataPointsDTO>;
+  /**
+   *
+   * @type {number}
+   * @memberof SummaryStatsDTO
+   */
+  numRules: number;
+  /**
+   *
+   * @type {number}
+   * @memberof SummaryStatsDTO
+   */
+  numAccounts: number;
+  /**
+   *
+   * @type {number}
+   * @memberof SummaryStatsDTO
+   */
+  totalSpend: number;
+  /**
+   *
+   * @type {string}
+   * @memberof SummaryStatsDTO
+   */
+  costliestDate?: string;
+  /**
+   *
+   * @type {PlaidTransaction}
+   * @memberof SummaryStatsDTO
+   */
+  largestTransaction?: PlaidTransaction;
+  /**
+   *
+   * @type {Array<PlaidTransaction>}
+   * @memberof SummaryStatsDTO
+   */
+  transactions: Array<PlaidTransaction>;
+  /**
+   *
+   * @type {Array<DailyDataPointsDTO>}
+   * @memberof SummaryStatsDTO
+   */
+  dailyDataPoints: Array<DailyDataPointsDTO>;
 }

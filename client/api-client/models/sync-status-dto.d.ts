@@ -15,16 +15,16 @@
  * @interface SyncStatusDTO
  */
 export interface SyncStatusDTO {
-    /**
-     *
-     * @type {string}
-     * @memberof SyncStatusDTO
-     */
-    status: string;
-    /**
-     *
-     * @type {number}
-     * @memberof SyncStatusDTO
-     */
-    percentComplete: number;
+  /**
+   *
+   * @type {string}
+   * @memberof SyncStatusDTO
+   */
+  status: string;
+  /**
+   *
+   * @type {number}
+   * @memberof SyncStatusDTO
+   */
+  percentComplete: number;
 }

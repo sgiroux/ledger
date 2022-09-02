@@ -15,40 +15,40 @@
  * @interface Rule
  */
 export interface Rule {
-    /**
-     *
-     * @type {number}
-     * @memberof Rule
-     */
-    id: number;
-    /**
-     *
-     * @type {string}
-     * @memberof Rule
-     */
-    name: string;
-    /**
-     *
-     * @type {any}
-     * @memberof Rule
-     */
-    field: any;
-    /**
-     *
-     * @type {any}
-     * @memberof Rule
-     */
-    operation: any;
-    /**
-     *
-     * @type {string}
-     * @memberof Rule
-     */
-    criteria: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof Rule
-     */
-    isEnabled: boolean;
+  /**
+   *
+   * @type {number}
+   * @memberof Rule
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Rule
+   */
+  name: string;
+  /**
+   *
+   * @type {any}
+   * @memberof Rule
+   */
+  field: any;
+  /**
+   *
+   * @type {any}
+   * @memberof Rule
+   */
+  operation: any;
+  /**
+   *
+   * @type {string}
+   * @memberof Rule
+   */
+  criteria: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof Rule
+   */
+  isEnabled: boolean;
 }

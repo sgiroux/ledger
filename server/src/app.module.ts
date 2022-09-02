@@ -9,17 +9,13 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
 import { PlaidModule } from './plaid/plaid.module';
 import { ConfigurationUtil } from './shared/configuration-util';
 import { PlaidItemsModule } from './plaid-items/plaid-items.module';
 import { PlaidAccountsModule } from './plaid-accounts/plaid-accounts.module';
 import { PlaidOauthModule } from './plaid-oauth/plaid-oauth.module';
-import { PlaidItem } from './plaid-items/entities/plaid-item.entity';
-import { PlaidAccount } from './plaid-accounts/entities/plaid-account.entity';
 import { AuthModule } from './auth/auth.module';
 import { PlaidTransactionsModule } from './plaid-transactions/plaid-transactions.module';
-import { PlaidTransaction } from './plaid-transactions/entities/plaid-transaction.entity';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksModule } from './tasks/tasks.module';
 import { LoggerModule } from 'nestjs-pino';
@@ -27,7 +23,8 @@ import { LoggerMiddleware } from './shared/middleware/logging.middleware';
 import { SyncModule } from './sync/sync.module';
 import { StatsModule } from './stats/stats.module';
 import { RulesModule } from './rules/rules.module';
-import { Rule } from './rules/entities/rule.entity';
+import { getNestDataSource } from './datasource';
+import { SystemModule } from './system/system.module';
 
 @Module({
   imports: [
@@ -67,19 +64,7 @@ import { Rule } from './rules/entities/rule.entity';
       ttl: 5,
       limit: 20,
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      //useFactory: async (configService: ConfigService) => ({
-      useFactory: async () => ({
-        type: 'better-sqlite3',
-        //database: `./db/db.sqlite3`,
-        database: `db.sqlite3`,
-        entities: [User, PlaidItem, PlaidAccount, PlaidTransaction, Rule],
-        synchronize: true,
-        //logging: true,
-      }),
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRoot(getNestDataSource().options),
     UsersModule,
     PlaidModule,
     PlaidOauthModule,
@@ -91,6 +76,7 @@ import { Rule } from './rules/entities/rule.entity';
     SyncModule,
     StatsModule,
     RulesModule,
+    SystemModule,
   ],
   providers: [
     // Throtlling for all controllers
@@ -103,6 +89,6 @@ import { Rule } from './rules/entities/rule.entity';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
+    //consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }

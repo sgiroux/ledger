@@ -15,51 +15,51 @@
  * @interface CreateRuleDTO
  */
 export interface CreateRuleDTO {
-    /**
-     *
-     * @type {string}
-     * @memberof CreateRuleDTO
-     */
-    name: string;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateRuleDTO
-     */
-    criteria: string;
-    /**
-     *
-     * @type {boolean}
-     * @memberof CreateRuleDTO
-     */
-    isEnabled: boolean;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateRuleDTO
-     */
-    field: CreateRuleDTOFieldEnum;
-    /**
-     *
-     * @type {string}
-     * @memberof CreateRuleDTO
-     */
-    operation: CreateRuleDTOOperationEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateRuleDTO
+   */
+  name: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateRuleDTO
+   */
+  criteria: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof CreateRuleDTO
+   */
+  isEnabled: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateRuleDTO
+   */
+  field: CreateRuleDTOFieldEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateRuleDTO
+   */
+  operation: CreateRuleDTOOperationEnum;
 }
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export declare enum CreateRuleDTOFieldEnum {
-    Name = "name",
-    TransactionId = "transactionId",
-    PaymentChannel = "paymentChannel"
+  Name = 'name',
+  TransactionId = 'transactionId',
+  PaymentChannel = 'paymentChannel',
 }
 /**
-    * @export
-    * @enum {string}
-    */
+ * @export
+ * @enum {string}
+ */
 export declare enum CreateRuleDTOOperationEnum {
-    Contains = "contains",
-    Equals = "equals"
+  Contains = 'contains',
+  Equals = 'equals',
 }

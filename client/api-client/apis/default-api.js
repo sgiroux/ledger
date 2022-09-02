@@ -770,15 +770,58 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @param {CreateUserDTO} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tasksControllerSyncTransactions: function (options) {
+        systemControllerInitialize: function (body, options) {
+            if (options === void 0) { options = {}; }
+            return __awaiter(_this, void 0, void 0, function () {
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions, needsSerialization;
+                return __generator(this, function (_a) {
+                    // verify required parameter 'body' is not null or undefined
+                    if (body === null || body === undefined) {
+                        throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling systemControllerInitialize.');
+                    }
+                    localVarPath = "/system/initialize";
+                    localVarUrlObj = new URL(localVarPath, 'https://example.com');
+                    if (configuration) {
+                        baseOptions = configuration.baseOptions;
+                    }
+                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarHeaderParameter = {};
+                    localVarQueryParameter = {};
+                    localVarHeaderParameter['Content-Type'] = 'application/json';
+                    query = new URLSearchParams(localVarUrlObj.search);
+                    for (key in localVarQueryParameter) {
+                        query.set(key, localVarQueryParameter[key]);
+                    }
+                    for (key in options.params) {
+                        query.set(key, options.params[key]);
+                    }
+                    localVarUrlObj.search = (new URLSearchParams(query)).toString();
+                    headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+                    localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
+                    needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+                    localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+                    return [2 /*return*/, {
+                            url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                            options: localVarRequestOptions,
+                        }];
+                });
+            });
+        },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemControllerStatus: function (options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_a) {
-                    localVarPath = "/tasks/syncTransactions";
+                    localVarPath = "/system/status";
                     localVarUrlObj = new URL(localVarPath, 'https://example.com');
                     if (configuration) {
                         baseOptions = configuration.baseOptions;
@@ -805,28 +848,22 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
-         * @param {CreateUserDto} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate: function (body, options) {
+        tasksControllerStartSync: function (options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
-                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions, needsSerialization;
+                var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_a) {
-                    // verify required parameter 'body' is not null or undefined
-                    if (body === null || body === undefined) {
-                        throw new base_1.RequiredError('body', 'Required parameter body was null or undefined when calling usersControllerCreate.');
-                    }
-                    localVarPath = "/users/default";
+                    localVarPath = "/tasks/startSync";
                     localVarUrlObj = new URL(localVarPath, 'https://example.com');
                     if (configuration) {
                         baseOptions = configuration.baseOptions;
                     }
-                    localVarRequestOptions = __assign(__assign({ method: 'POST' }, baseOptions), options);
+                    localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
                     localVarHeaderParameter = {};
                     localVarQueryParameter = {};
-                    localVarHeaderParameter['Content-Type'] = 'application/json';
                     query = new URLSearchParams(localVarUrlObj.search);
                     for (key in localVarQueryParameter) {
                         query.set(key, localVarQueryParameter[key]);
@@ -837,8 +874,6 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
                     localVarUrlObj.search = (new URLSearchParams(query)).toString();
                     headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
                     localVarRequestOptions.headers = __assign(__assign(__assign({}, localVarHeaderParameter), headersFromBaseOptions), options.headers);
-                    needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-                    localVarRequestOptions.data = needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
                     return [2 /*return*/, {
                             url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                             options: localVarRequestOptions,
@@ -1259,15 +1294,16 @@ exports.DefaultApiFp = function (configuration) {
         },
         /**
          *
+         * @param {CreateUserDTO} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tasksControllerSyncTransactions: function (options) {
+        systemControllerInitialize: function (body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).tasksControllerSyncTransactions(options)];
+                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).systemControllerInitialize(body, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1282,16 +1318,38 @@ exports.DefaultApiFp = function (configuration) {
         },
         /**
          *
-         * @param {CreateUserDto} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate: function (body, options) {
+        systemControllerStatus: function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).usersControllerCreate(body, options)];
+                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).systemControllerStatus(options)];
+                        case 1:
+                            localVarAxiosArgs = _a.sent();
+                            return [2 /*return*/, function (axios, basePath) {
+                                    if (axios === void 0) { axios = axios_1.default; }
+                                    if (basePath === void 0) { basePath = base_1.BASE_PATH; }
+                                    var axiosRequestArgs = __assign(__assign({}, localVarAxiosArgs.options), { url: basePath + localVarAxiosArgs.url });
+                                    return axios.request(axiosRequestArgs);
+                                }];
+                    }
+                });
+            });
+        },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tasksControllerStartSync: function (options) {
+            return __awaiter(this, void 0, void 0, function () {
+                var localVarAxiosArgs;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).tasksControllerStartSync(options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1530,26 +1588,38 @@ exports.DefaultApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @param {CreateUserDTO} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tasksControllerSyncTransactions: function (options) {
+        systemControllerInitialize: function (body, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.DefaultApiFp(configuration).tasksControllerSyncTransactions(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.DefaultApiFp(configuration).systemControllerInitialize(body, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
         /**
          *
-         * @param {CreateUserDto} body
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersControllerCreate: function (body, options) {
+        systemControllerStatus: function (options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.DefaultApiFp(configuration).usersControllerCreate(body, options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.DefaultApiFp(configuration).systemControllerStatus(options).then(function (request) { return request(axios, basePath); })];
+                });
+            });
+        },
+        /**
+         *
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tasksControllerStartSync: function (options) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, exports.DefaultApiFp(configuration).tasksControllerStartSync(options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1818,30 +1888,44 @@ var DefaultApi = /** @class */ (function (_super) {
     };
     /**
      *
+     * @param {CreateUserDTO} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    DefaultApi.prototype.tasksControllerSyncTransactions = function (options) {
+    DefaultApi.prototype.systemControllerInitialize = function (body, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.DefaultApiFp(this.configuration).tasksControllerSyncTransactions(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.DefaultApiFp(this.configuration).systemControllerInitialize(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };
     /**
      *
-     * @param {CreateUserDto} body
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    DefaultApi.prototype.usersControllerCreate = function (body, options) {
+    DefaultApi.prototype.systemControllerStatus = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.DefaultApiFp(this.configuration).usersControllerCreate(body, options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.DefaultApiFp(this.configuration).systemControllerStatus(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+            });
+        });
+    };
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    DefaultApi.prototype.tasksControllerStartSync = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, exports.DefaultApiFp(this.configuration).tasksControllerStartSync(options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

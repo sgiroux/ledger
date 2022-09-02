@@ -20,10 +20,8 @@ const Start = () => {
   // get a link_token from your API when component mounts
   useEffect(() => {
     const createLinkToken = async () => {
-      const response = await fetch('/api/plaid/create_link_token', {
-        method: 'POST',
-      });
-      const { link_token } = await response.json();
+      const response = await axios.post('/api/plaid/create_link_token');
+      const { link_token } = await response.data;
       setToken(link_token);
       localStorage.setItem("link_token", link_token);
     };

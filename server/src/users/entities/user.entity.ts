@@ -15,12 +15,6 @@ export class User {
   @Exclude()
   password: string;
 
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
   @OneToMany(() => PlaidItem, (plaidItem) => plaidItem.user)
   plaidItems: PlaidItem[];
 

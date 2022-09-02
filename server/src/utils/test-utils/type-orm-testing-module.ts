@@ -16,7 +16,6 @@ export const TypeOrmTestingModule = () => [
     dropSchema: false,
     entities: [User, PlaidItem, PlaidAccount, PlaidTransaction, Rule],
     synchronize: true,
-    //logging: true,
   }),
   ConfigModule.forRoot({
     isGlobal: true,

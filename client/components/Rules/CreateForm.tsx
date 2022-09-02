@@ -23,7 +23,7 @@ const CreateForm:React.FC = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [processingError, setProcessingError] = useState<string>();
 
-  const saveForm = async () => {
+  const submitForm = async () => {
     setIsProcessing(true);
 
     try {
@@ -69,12 +69,12 @@ const CreateForm:React.FC = () => {
     return hasError;
   }
 
-  const handleSave = (event:React.MouseEvent<HTMLElement>) => {
+  const handleSubmit = (event:React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
 
     // Save it
     if (!validate()) {
-      saveForm();
+      submitForm();
     }
   }
 
@@ -114,7 +114,7 @@ const CreateForm:React.FC = () => {
                       nameError ? 
                         'border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500':
                         'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500', 
-                        'max-w-lg block w-full shadow-sm  sm:max-w-xs sm:text-sm rounded-md'
+                        'max-w-lg block w-full shadow-sm sm:max-w-xs sm:text-sm rounded-md'
                       )
                     }
                   />
@@ -133,7 +133,7 @@ const CreateForm:React.FC = () => {
                   <select
                     id="rule-field"
                     name="rule-field"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 max-w-lg block w-full shadow-sm  sm:max-w-xs sm:text-sm rounded-md"
+                    className="mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 max-w-lg block w-full shadow-sm  sm:max-w-xs sm:text-sm rounded-md"
                     value={field}
                     onChange={e => setField(e.target.value)}
                   >
@@ -153,7 +153,7 @@ const CreateForm:React.FC = () => {
                   <select
                     id="rule-operation"
                     name="rule-operation"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 max-w-lg block w-full shadow-sm  sm:max-w-xs sm:text-sm rounded-md"
+                    className="mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 max-w-lg block w-full shadow-sm  sm:max-w-xs sm:text-sm rounded-md"
                     onChange={e => setOperation(e.target.value)}
                     value={operation}
                   >
@@ -205,7 +205,7 @@ const CreateForm:React.FC = () => {
             </button>
             <button
               disabled={isProcessing}
-              onClick={(event) => handleSave(event)}
+              onClick={(event) => handleSubmit(event)}
               type="submit"
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >

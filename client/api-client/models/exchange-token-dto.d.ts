@@ -15,10 +15,10 @@
  * @interface ExchangeTokenDTO
  */
 export interface ExchangeTokenDTO {
-    /**
-     *
-     * @type {string}
-     * @memberof ExchangeTokenDTO
-     */
-    publicToken: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ExchangeTokenDTO
+   */
+  publicToken: string;
 }

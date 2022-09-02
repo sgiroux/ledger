@@ -17,46 +17,46 @@ import { User } from './user';
  * @interface PlaidItem
  */
 export interface PlaidItem {
-    /**
-     *
-     * @type {number}
-     * @memberof PlaidItem
-     */
-    id: number;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidItem
-     */
-    itemId: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidItem
-     */
-    updateType: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidItem
-     */
-    accessToken: string;
-    /**
-     *
-     * @type {string}
-     * @memberof PlaidItem
-     */
-    transactionSyncCursor?: string;
-    /**
-     *
-     * @type {User}
-     * @memberof PlaidItem
-     */
-    user: User;
-    /**
-     *
-     * @type {Array<PlaidAccount>}
-     * @memberof PlaidItem
-     */
-    plaidAccounts: Array<PlaidAccount>;
+  /**
+   *
+   * @type {number}
+   * @memberof PlaidItem
+   */
+  id: number;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidItem
+   */
+  itemId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidItem
+   */
+  updateType: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidItem
+   */
+  accessToken: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaidItem
+   */
+  transactionSyncCursor?: string;
+  /**
+   *
+   * @type {User}
+   * @memberof PlaidItem
+   */
+  user: User;
+  /**
+   *
+   * @type {Array<PlaidAccount>}
+   * @memberof PlaidItem
+   */
+  plaidAccounts: Array<PlaidAccount>;
 }

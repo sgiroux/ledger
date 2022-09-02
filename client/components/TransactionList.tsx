@@ -11,8 +11,6 @@ export interface TransactionListProps {
 }
 
 const TransactionList: React.FC<TransactionListProps> = ({transactions}) => {
-
-
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-md">
       <ul role="list" className="divide-y divide-gray-200">
@@ -40,8 +38,8 @@ const TransactionList: React.FC<TransactionListProps> = ({transactions}) => {
                       <div className="flex space-x-0 overflow-hidden">
                         
                         {/* This should be categories. Would be neat to see 
-                        <ShoppingBagIcon className="text-indigo-600 text-white inline-block h-6 w-6 rounded-full ring-2 ring-white"/>
-                        <BuildingOfficeIcon className="text-indigo-600 text-white inline-block h-6 w-6 rounded-full ring-2 ring-white"/>
+                        <ShoppingBagIcon className="text-indigo-600 inline-block h-6 w-6 rounded-full ring-2 ring-white"/>
+                        <BuildingOfficeIcon className="text-indigo-600 inline-block h-6 w-6 rounded-full ring-2 ring-white"/>
                         */}
                       </div>
                     </div>

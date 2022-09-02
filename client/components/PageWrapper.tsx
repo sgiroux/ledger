@@ -6,6 +6,8 @@ import { HomeIcon, FolderIcon, ClipboardDocumentCheckIcon,  WalletIcon, XMarkIco
 import { BellIcon} from '@heroicons/react/24/outline'
 
 import Link from 'next/link'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon},
@@ -33,6 +35,17 @@ export interface PageWrapperProps {
 
 const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+
+  const logOut = async () => {
+    try {
+      await axios.post("/api/auth/logout");
+      router.push('/login');
+    } catch(err) {
+      router.push('/login');
+    }
+  }
+
   return (
     <>
       <div>
@@ -275,6 +288,15 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
                           )}
                         </Menu.Item>
                       ))}
+                       <Menu.Item>
+                          <button
+                            onClick={logOut}
+                            className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left" 
+                          >
+                            Log out
+                          </button>
+  
+                        </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </Menu>

@@ -1,3 +1,4 @@
+export * from './access-dto';
 export * from './create-rule-dto';
 export * from './create-user-dto';
 export * from './daily-data-points-dto';
@@ -9,5 +10,6 @@ export * from './plaid-transaction';
 export * from './rule';
 export * from './summary-stats-dto';
 export * from './sync-status-dto';
+export * from './system-status-dto';
 export * from './update-rule-dto';
 export * from './user';

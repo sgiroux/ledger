@@ -27,7 +27,8 @@ class AnzuAPIError {
 }
 
 export const handleAPIError = (res: NextApiResponse, err: any) => {
-  logger.log(`An Error Has Occured: ${err}`);
+  logger.log(err);
+  logger.log(`An Error Has Occured: ${err.toString()}`);
   if (err instanceof AnzuAPIError) {
     res.status(err.getHttpStatus()).json(err.getError());
   } else {
@@ -41,8 +42,9 @@ export const handleAPIError = (res: NextApiResponse, err: any) => {
 export const createDefaultAPI = (req: NextApiRequest) => {
   const axiosInstance = axios.create({
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjEzODc0ODAsImV4cCI6MTY2MTk5MjI4MH0.FG3V-vKKGcl-KkTSSrKGsqrozpiFynNpZqz3p3Ty8Uk`,
+      Authorization: `Bearer ${req.cookies['auth-token']}`,
     },
+    withCredentials: true,
   });
 
   axiosInstance.interceptors.response.use(

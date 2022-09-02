@@ -31,7 +31,6 @@ async function httpPost(req: NextApiRequest, res: NextApiResponse) {
 
     const cookies = new Cookies(req, res);
 
-    console.log('SETTING COOKIES');
     cookies.set('auth-token', response.data.accessToken, {
       httpOnly: true,
       sameSite: 'strict',

@@ -1,5 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import PageWrapper from "../components/PageWrapper";
+import PageWrapper from "../components/PageWrapper/PageWrapper";
 import { UserContext } from "../contexts/UserContext";
 import { getUserSSR } from "../utils/server-side-render-utils";
 import { InferGetServerSidePropsType } from 'next'

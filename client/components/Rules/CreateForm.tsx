@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router"
 import { useState } from "react";
 import { mutate } from "swr";
+import Alert from "../Alert";
 
 
 function classNames(...classes:string[]) {
@@ -81,13 +82,8 @@ const CreateForm:React.FC = () => {
   return (
     <div className="px-4 sm:px-6 md:px-8">
 
-      <div hidden={!processingError} className="mb-5">
-        <div className="bg-gray-700 border-l-4 border-gray-800 text-gray-300 p-4" role="alert">
-          <p className="font-bold">Error</p>
-          <p>{processingError}</p>
-        </div>
-      </div>
-
+      <Alert message={processingError} isVisible={Boolean(processingError)} />
+     
       <form className="space-y-8 divide-y divide-gray-200">
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div>

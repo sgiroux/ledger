@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
 import { Rule } from "../../api-client/models/rule";
+import Alert from "../Alert";
 import Loader from "../Loader";
 
 
@@ -47,10 +48,7 @@ const Rules:React.FC = () => {
   if (error) {
     return (
       <div className="px-4 sm:px-6 md:px-8">
-        <div className="bg-gray-700 border-l-4 border-gray-800 text-gray-300 p-4" role="alert">
-          <p className="font-bold">Error</p>
-          <p>Something went wrong.</p>
-        </div>
+        <Alert message="Something went went" isVisible={true} />
       </div>
     );
   }

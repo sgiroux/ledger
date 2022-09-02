@@ -25,7 +25,7 @@ const SetupPage = ({}: InferGetServerSidePropsType<typeof getServerSideProps>) =
     setIsProcessing(true);
 
     try {
-      const response = await axios.post('/api/auth/login', {
+      const response = await axios.post('/api/system/initialize', {
         email: email,
         password: password
     });

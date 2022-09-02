@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import Accounts from "../../components/Accounts/Accounts";
-import PageWrapper from "../../components/PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import { UserContext } from "../../contexts/UserContext";
 import { getUserSSR } from "../../utils/server-side-render-utils";
 

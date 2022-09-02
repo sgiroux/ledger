@@ -1,13 +1,13 @@
 
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { GiftIcon } from '@heroicons/react/24/outline'
 import { HomeIcon, FolderIcon, ClipboardDocumentCheckIcon,  WalletIcon, XMarkIcon, Bars3Icon, BanknotesIcon} from '@heroicons/react/24/solid'
 import { BellIcon} from '@heroicons/react/24/outline'
 
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import SupportBadge from './SupportBadge'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon},
@@ -129,21 +129,8 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
                       ))}
                     </nav>
                   </div>
-                  
-                  <div className="flex-shrink-0 flex bg-gray-700 p-4">
-                    <a href="#" className="flex-shrink-0 group block">
-                      <div className="flex items-center">
-                        <div>
-                          <GiftIcon className="inline-block h-10 w-10 rounded-full text-white"/>
-                          
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-base font-medium text-white">Support Ledger</p>
-                          <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">Buy Me A Coffee</p>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+                  <SupportBadge />
+                 
                   
                 </Dialog.Panel>
               </Transition.Child>
@@ -194,20 +181,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({children, page}) => {
               </nav>
             </div>
             
-            <div className="flex-shrink-0 flex bg-gray-700 p-4">
-              <a href="#" className="flex-shrink-0 group block">
-                <div className="flex items-center">
-                  <div>
-                    <GiftIcon className="inline-block h-10 w-10 rounded-full text-white"/>
-                    
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-base font-medium text-white">Support Ledger</p>
-                    <p className="text-sm font-medium text-gray-400 group-hover:text-gray-300">Buy Me A Coffee</p>
-                  </div>
-                </div>
-              </a>
-            </div>
+            <SupportBadge />
           </div>
         </div>
         <div className="md:pl-64 flex flex-col">

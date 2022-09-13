@@ -20,6 +20,18 @@ export interface UpdateRuleDTO {
    * @type {string}
    * @memberof UpdateRuleDTO
    */
+  field?: UpdateRuleDTOFieldEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateRuleDTO
+   */
+  operation?: UpdateRuleDTOOperationEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateRuleDTO
+   */
   name?: string;
   /**
    *
@@ -33,18 +45,6 @@ export interface UpdateRuleDTO {
    * @memberof UpdateRuleDTO
    */
   isEnabled?: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof UpdateRuleDTO
-   */
-  field?: UpdateRuleDTOFieldEnum;
-  /**
-   *
-   * @type {string}
-   * @memberof UpdateRuleDTO
-   */
-  operation?: UpdateRuleDTOOperationEnum;
 }
 /**
  * @export

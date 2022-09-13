@@ -2,15 +2,15 @@ import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { User } from '../users/entities/user.entity';
 import { Cache } from 'cache-manager';
-import { SyncStatusDTO } from './dto/sync-status-dto';
-import { PlaidItemsService } from '../plaid-items/plaid-items.service';
+import { SyncStatusDTO } from './dto/sync-status.dto';
+import { ItemsService } from '../items/items.service';
 import { UsersService } from '../users/users.service';
-import { PlaidAccountsService } from '../plaid-accounts/plaid-accounts.service';
+import { AccountsService } from '../accounts/accounts.service';
 import { PlaidService } from '../plaid/plaid.service';
-import { RemovedTransaction, Transaction } from 'plaid';
-import { PlaidAccount } from '../plaid-accounts/entities/plaid-account.entity';
+import { RemovedTransaction, Transaction as PlaidTransaction } from 'plaid';
+import { Account } from '../accounts/entities/account.entity';
 import { DataSource, EntityManager } from 'typeorm';
-import { PlaidTransaction } from '../plaid-transactions/entities/plaid-transaction.entity';
+import { Transaction } from '../transactions/entities/transaction.entity';
 
 @Injectable()
 export class SyncService {
@@ -18,8 +18,8 @@ export class SyncService {
 
   constructor(
     private schedulerRegistry: SchedulerRegistry,
-    private readonly plaidItemsService: PlaidItemsService,
-    private readonly plaidAccountsService: PlaidAccountsService,
+    private readonly itemsService: ItemsService,
+    private readonly accountsService: AccountsService,
     private readonly plaidService: PlaidService,
     private readonly usersService: UsersService,
     private readonly dataSource: DataSource,
@@ -67,7 +67,7 @@ export class SyncService {
 
   private async processModifiedTransactions(
     entityManager: EntityManager,
-    remoteTransactions: Array<Transaction>,
+    remoteTransactions: Array<PlaidTransaction>,
     plaidAccountIdToAccount: Map<any, any>, //TODO: Make this more strongly types
   ) {
     this.logger.debug(
@@ -80,30 +80,27 @@ export class SyncService {
         plaidAccountIdToAccount.get(remoteTransaction.account_id) !== undefined,
     );
 
-    filteredRemoteTransactions.forEach(async (remotePlaidTransaction) => {
-      const plaidTransactions = await entityManager.find(PlaidTransaction, {
+    filteredRemoteTransactions.forEach(async (remoteTransaction) => {
+      const transactions = await entityManager.find(Transaction, {
         where: {
-          transactionId: remotePlaidTransaction.transaction_id,
+          transactionId: remoteTransaction.transaction_id,
         },
       });
 
-      plaidTransactions.forEach(async (plaidTransaction) => {
-        plaidTransaction.amount = remotePlaidTransaction.amount;
-        plaidTransaction.date = remotePlaidTransaction.date;
-        plaidTransaction.datetime = remotePlaidTransaction.datetime;
-        plaidTransaction.isoCurrencyCode =
-          remotePlaidTransaction.iso_currency_code;
-        plaidTransaction.name = remotePlaidTransaction.name;
-        plaidTransaction.pending = remotePlaidTransaction.pending;
-        plaidTransaction.categoryId = remotePlaidTransaction.category_id;
-        plaidTransaction.transactionId = remotePlaidTransaction.transaction_id;
-        plaidTransaction.paymentChannel =
-          remotePlaidTransaction.payment_channel;
-        plaidTransaction.merchantName =
-          remotePlaidTransaction.merchant_name || null;
-        plaidTransaction.category = remotePlaidTransaction.category;
+      transactions.forEach(async (transaction) => {
+        transaction.amount = remoteTransaction.amount;
+        transaction.date = remoteTransaction.date;
+        transaction.datetime = remoteTransaction.datetime;
+        transaction.isoCurrencyCode = remoteTransaction.iso_currency_code;
+        transaction.name = remoteTransaction.name;
+        transaction.pending = remoteTransaction.pending;
+        transaction.categoryId = remoteTransaction.category_id;
+        transaction.transactionId = remoteTransaction.transaction_id;
+        transaction.paymentChannel = remoteTransaction.payment_channel;
+        transaction.merchantName = remoteTransaction.merchant_name || null;
+        transaction.category = remoteTransaction.category;
 
-        await entityManager.save(plaidTransaction);
+        await entityManager.save(transaction);
       });
     });
   }
@@ -116,16 +113,16 @@ export class SyncService {
       `Processing removed transactions. ${remoteTransactions.length} records`,
     );
 
-    await remoteTransactions.forEach(async (remotePlaidTransaction) => {
-      await entityManager.delete(PlaidTransaction, {
-        transactionId: remotePlaidTransaction.transaction_id,
+    await remoteTransactions.forEach(async (remoteTransaction) => {
+      await entityManager.delete(Transaction, {
+        remoteId: remoteTransaction.transaction_id,
       });
     });
   }
 
   private async processAddedTransactions(
     entityManager: EntityManager,
-    remoteTransactions: Array<Transaction>,
+    remoteTransactions: Array<PlaidTransaction>,
     plaidAccountIdToAccount: Map<any, any>, //TODO: Make this more strongly types
   ) {
     this.logger.debug(
@@ -138,34 +135,28 @@ export class SyncService {
         plaidAccountIdToAccount.get(remoteTransaction.account_id) !== undefined,
     );
 
-    const plaidTransactions = filteredRemoteTransactions.map(
-      (remotePlaidTransaction) => {
-        const plaidTransaction = new PlaidTransaction();
-        plaidTransaction.amount = remotePlaidTransaction.amount;
-        plaidTransaction.date = remotePlaidTransaction.date;
-        plaidTransaction.datetime = remotePlaidTransaction.datetime;
-        plaidTransaction.isoCurrencyCode =
-          remotePlaidTransaction.iso_currency_code;
-        plaidTransaction.name = remotePlaidTransaction.name;
-        plaidTransaction.pending = remotePlaidTransaction.pending;
-        plaidTransaction.transactionId = remotePlaidTransaction.transaction_id;
-        plaidTransaction.paymentChannel =
-          remotePlaidTransaction.payment_channel;
-        plaidTransaction.merchantName =
-          remotePlaidTransaction.merchant_name || null;
-        plaidTransaction.categoryId = remotePlaidTransaction.category_id;
-        plaidTransaction.paymentChannel =
-          remotePlaidTransaction.payment_channel;
-        plaidTransaction.category = remotePlaidTransaction.category;
+    const transactions = filteredRemoteTransactions.map((remoteTransaction) => {
+      const transaction = new Transaction();
+      transaction.amount = remoteTransaction.amount;
+      transaction.date = remoteTransaction.date;
+      transaction.datetime = remoteTransaction.datetime;
+      transaction.isoCurrencyCode = remoteTransaction.iso_currency_code;
+      transaction.name = remoteTransaction.name;
+      transaction.pending = remoteTransaction.pending;
+      transaction.transactionId = remoteTransaction.transaction_id;
+      transaction.paymentChannel = remoteTransaction.payment_channel;
+      transaction.merchantName = remoteTransaction.merchant_name || null;
+      transaction.categoryId = remoteTransaction.category_id;
+      transaction.paymentChannel = remoteTransaction.payment_channel;
+      transaction.category = remoteTransaction.category;
 
-        plaidTransaction.plaidAccount = plaidAccountIdToAccount.get(
-          remotePlaidTransaction.account_id,
-        );
+      transaction.account = plaidAccountIdToAccount.get(
+        remoteTransaction.account_id,
+      );
 
-        return plaidTransaction;
-      },
-    );
-    await entityManager.save(plaidTransactions);
+      return transaction;
+    });
+    await entityManager.save(transactions);
   }
 
   private async sync(jobName: string, userId: number) {
@@ -177,31 +168,30 @@ export class SyncService {
       });
 
       const user = await this.usersService.getUserById(userId);
-      const plaidItems = await this.plaidItemsService.selectAllByUser(user);
+      const items = await this.itemsService.selectAllByUser(user);
 
-      for (const plaidItem of plaidItems) {
-        const plaidAccounts =
-          await this.plaidAccountsService.selectAllByPlaidItem(plaidItem);
+      for (const item of items) {
+        const accounts = await this.accountsService.selectAllByItem(item);
 
-        if (plaidAccounts.length === 0) {
+        if (accounts.length === 0) {
           this.logger.warn(
-            `PlaidItem-${plaidItem.id} has not associated accounts. Aborting.`,
+            `Item-${item.id} has not associated accounts. Aborting.`,
           );
           continue;
         }
 
         // Create a mapping of accountId to account objects for faster lookup
-        const plaidAccountIdToAccount = new Map<string, PlaidAccount>();
-        plaidAccounts.forEach((plaidAccount) =>
-          plaidAccountIdToAccount.set(plaidAccount.accountId, plaidAccount),
+        const plaidAccountIdToAccount = new Map<string, Account>();
+        accounts.forEach((account) =>
+          plaidAccountIdToAccount.set(account.accountId, account),
         );
 
         let hasMoreTransactions = false;
         do {
           const syncTransactionsResponse =
             await this.plaidService.syncTransactions(
-              plaidItem.accessToken,
-              plaidItem.transactionSyncCursor,
+              item.accessToken,
+              item.transactionSyncCursor,
             );
 
           await this.dataSource.transaction(async (manager) => {
@@ -222,9 +212,8 @@ export class SyncService {
               plaidAccountIdToAccount,
             );
 
-            plaidItem.transactionSyncCursor =
-              syncTransactionsResponse.next_cursor;
-            await manager.save(plaidItem);
+            item.transactionSyncCursor = syncTransactionsResponse.next_cursor;
+            await manager.save(item);
           });
           hasMoreTransactions = syncTransactionsResponse.has_more;
         } while (hasMoreTransactions);

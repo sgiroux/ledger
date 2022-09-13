@@ -33,7 +33,7 @@ export default async function handler(
 async function httpDel(req: NextApiRequest, res: NextApiResponse, id: number) {
   try {
     const api = createDefaultAPI(req);
-    const response = await api.plaidAccountsControllerDelete(id);
+    const response = await api.accountsControllerDelete(id);
     res.json(response.data);
   } catch (err) {
     handleAPIError(res, err);

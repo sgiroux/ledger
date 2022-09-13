@@ -1,8 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean } from 'class-validator';
 
 export class SystemStatusDTO {
-  @ApiProperty()
   @IsBoolean()
   isInitialized: boolean;
 }

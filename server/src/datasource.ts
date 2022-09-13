@@ -10,7 +10,7 @@ const devConfig: DataSourceOptions = {
   database: database,
   synchronize: true,
   migrationsRun: false,
-  logging: true,
+  logging: false,
   entities: ['./src/**/*.entity.ts'],
   migrations: ['./dist/data/migration/*.ts'],
 };
@@ -20,7 +20,7 @@ const devConfigNest: DataSourceOptions = {
   database: database,
   synchronize: true,
   migrationsRun: false,
-  logging: true,
+  logging: false,
   entities: ['./dist/**/*.entity.js'],
   migrations: ['./dist/data/migration/*.js'],
 };

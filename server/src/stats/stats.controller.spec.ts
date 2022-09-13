@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PlaidAccountsModule } from '../plaid-accounts/plaid-accounts.module';
-import { PlaidTransactionsModule } from '../plaid-transactions/plaid-transactions.module';
+import { AccountsModule } from '../accounts/accounts.module';
+import { TransactionsModule } from '../transactions/transactions.module';
 import { RulesModule } from '../rules/rules.module';
 import { TypeOrmTestingModule } from '../utils/test-utils/type-orm-testing-module';
 import { StatsController } from './stats.controller';
@@ -13,8 +13,8 @@ describe('StatsController', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ...TypeOrmTestingModule(),
-        PlaidTransactionsModule,
-        PlaidAccountsModule,
+        TransactionsModule,
+        AccountsModule,
         RulesModule,
       ],
       controllers: [StatsController],

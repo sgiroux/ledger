@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   try {
     const api = createDefaultAPI(req);
-    await api.plaidOauthControllerExchangeToken(req.body);
+    await api.oauthControllerExchangeToken(req.body);
     res.status(200);
     res.end();
   } catch (err) {

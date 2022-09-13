@@ -1,9 +1,7 @@
-import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { PlaidAccountsModule } from '../plaid-accounts/plaid-accounts.module';
-import { PlaidItemsModule } from '../plaid-items/plaid-items.module';
+import { AccountsModule } from '../accounts/accounts.module';
+import { ItemsModule } from '../items/items.module';
 import { PlaidModule } from '../plaid/plaid.module';
-import { TasksModule } from '../tasks/tasks.module';
 import { UsersModule } from '../users/users.module';
 import { TypeOrmTestingModule } from '../utils/test-utils/type-orm-testing-module';
 import { SyncModule } from './sync.module';
@@ -16,8 +14,8 @@ describe('SyncService', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ...TypeOrmTestingModule(),
-        PlaidItemsModule,
-        PlaidAccountsModule,
+        ItemsModule,
+        AccountsModule,
         PlaidModule,
         SyncModule,
         UsersModule,

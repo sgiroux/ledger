@@ -1,6 +1,5 @@
-import { PaperClipIcon } from "@heroicons/react/24/outline";
 import useSWR from "swr";
-import { PlaidTransaction } from "../../api-client";
+import { Transaction } from "../../api-client";
 import CurrencyFormat from "../CurrencyFormat";
 import DateFormat from "../DateFormat";
 import Loader from "../Loader";
@@ -11,7 +10,7 @@ interface TransactionDetailProps {
 }
 
 const TransactionDetail:React.FC<TransactionDetailProps> = ({id}) => {
-  const {data, error} = useSWR<PlaidTransaction>(`/api/transactions/${id}`);
+  const {data, error} = useSWR<Transaction>(`/api/transactions/${id}`);
 
   if (error) {
     return (

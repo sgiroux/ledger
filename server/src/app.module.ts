@@ -6,20 +6,19 @@ import {
 } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { PlaidModule } from './plaid/plaid.module';
 import { ConfigurationUtil } from './shared/configuration-util';
-import { PlaidItemsModule } from './plaid-items/plaid-items.module';
-import { PlaidAccountsModule } from './plaid-accounts/plaid-accounts.module';
-import { PlaidOauthModule } from './plaid-oauth/plaid-oauth.module';
+import { ItemsModule } from './items/items.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { OauthModule } from './oauth/oauth.module';
 import { AuthModule } from './auth/auth.module';
-import { PlaidTransactionsModule } from './plaid-transactions/plaid-transactions.module';
+import { TransactionsModule } from './transactions/transactions.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksModule } from './tasks/tasks.module';
 import { LoggerModule } from 'nestjs-pino';
-import { LoggerMiddleware } from './shared/middleware/logging.middleware';
 import { SyncModule } from './sync/sync.module';
 import { StatsModule } from './stats/stats.module';
 import { RulesModule } from './rules/rules.module';
@@ -67,11 +66,11 @@ import { SystemModule } from './system/system.module';
     TypeOrmModule.forRoot(getNestDataSource().options),
     UsersModule,
     PlaidModule,
-    PlaidOauthModule,
-    PlaidItemsModule,
-    PlaidAccountsModule,
+    OauthModule,
+    ItemsModule,
+    AccountsModule,
     AuthModule,
-    PlaidTransactionsModule,
+    TransactionsModule,
     TasksModule,
     SyncModule,
     StatsModule,
@@ -85,7 +84,6 @@ import { SystemModule } from './system/system.module';
       useClass: ThrottlerGuard,
     },
   ],
-  exports: [UsersModule, PlaidItemsModule, PlaidModule, PlaidAccountsModule],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

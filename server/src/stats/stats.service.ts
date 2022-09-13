@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { PlaidTransactionsService } from '../plaid-transactions/plaid-transactions.service';
+import { TransactionsService } from '../transactions/transactions.service';
 import { User } from '../users/entities/user.entity';
 import { DailyDataPointsDTO } from './dto/daily-data-point.dto';
 import { SummaryStatsDTO } from './dto/summary-stats.dto';
 import * as moment from 'moment';
-import { PlaidAccountsService } from '../plaid-accounts/plaid-accounts.service';
+import { AccountsService } from '../accounts/accounts.service';
 import { RulesService } from '../rules/rules.service';
 
 @Injectable()
 export class StatsService {
   constructor(
-    private readonly plaidTransactionsService: PlaidTransactionsService,
-    private readonly plaidAccountsService: PlaidAccountsService,
+    private readonly transactionsService: TransactionsService,
+    private readonly accountsService: AccountsService,
     private readonly rulesService: RulesService,
   ) {}
 
@@ -21,24 +21,20 @@ export class StatsService {
     const startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
 
     // Get number of accounts
-    const accounts = await this.plaidAccountsService.selectAllByUser(user);
+    const accounts = await this.accountsService.selectAllByUser(user);
     summaryStatsDTO.numAccounts = accounts.length;
 
     const rules = await this.rulesService.selectAllByUser(user);
     summaryStatsDTO.numRules = rules.length;
 
     //get the list of transactions
-    const transactions = await this.plaidTransactionsService.selectAllByUser(
+    const transactions = await this.transactionsService.selectAllByUser(
       user,
       true,
     );
-    const lastThirtyDaysOfTransaction = transactions.filter(
-      (plaidTransaction) => {
-        return (
-          plaidTransaction.date >= startDate && plaidTransaction.date <= endDate
-        );
-      },
-    );
+    const lastThirtyDaysOfTransaction = transactions.filter((transaction) => {
+      return transaction.date >= startDate && transaction.date <= endDate;
+    });
 
     // Group amount by keys
     const amountsByDate = lastThirtyDaysOfTransaction.reduce(

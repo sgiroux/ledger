@@ -23,7 +23,7 @@ export default async function handler(
 async function httpGet(req: NextApiRequest, res: NextApiResponse) {
   try {
     const api = createDefaultAPI(req);
-    const response = await api.plaidAccountsControllerSelectAll();
+    const response = await api.accountsControllerSelectAll();
     res.json(response.data);
   } catch (err) {
     handleAPIError(res, err);

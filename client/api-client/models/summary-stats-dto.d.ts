@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { DailyDataPointsDTO } from './daily-data-points-dto';
-import { PlaidTransaction } from './plaid-transaction';
+import { Transaction } from './transaction';
 /**
  *
  * @export
@@ -43,16 +43,16 @@ export interface SummaryStatsDTO {
   costliestDate?: string;
   /**
    *
-   * @type {PlaidTransaction}
+   * @type {Transaction}
    * @memberof SummaryStatsDTO
    */
-  largestTransaction?: PlaidTransaction;
+  largestTransaction?: Transaction;
   /**
    *
-   * @type {Array<PlaidTransaction>}
+   * @type {Array<Transaction>}
    * @memberof SummaryStatsDTO
    */
-  transactions: Array<PlaidTransaction>;
+  transactions: Array<Transaction>;
   /**
    *
    * @type {Array<DailyDataPointsDTO>}

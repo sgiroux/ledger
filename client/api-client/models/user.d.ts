@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PlaidItem } from './plaid-item';
+import { Item } from './item';
 import { Rule } from './rule';
 /**
  *
@@ -37,10 +37,10 @@ export interface User {
   password: string;
   /**
    *
-   * @type {Array<PlaidItem>}
+   * @type {Array<Item>}
    * @memberof User
    */
-  plaidItems: Array<PlaidItem>;
+  items: Array<Item>;
   /**
    *
    * @type {Array<Rule>}

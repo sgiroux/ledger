@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { PlaidItem } from '../../plaid-items/entities/plaid-item.entity';
+import { Item } from '../../items/entities/item.entity';
 import { Rule } from '../../rules/entities/rule.entity';
 
 @Entity()
@@ -15,8 +15,8 @@ export class User {
   @Exclude()
   password: string;
 
-  @OneToMany(() => PlaidItem, (plaidItem) => plaidItem.user)
-  plaidItems: PlaidItem[];
+  @OneToMany(() => Item, (item) => item.user)
+  items: Item[];
 
   @OneToMany(() => Rule, (rule) => rule.user)
   rules: Rule[];

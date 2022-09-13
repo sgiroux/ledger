@@ -2,12 +2,12 @@
 
 import { CalendarIcon, ShoppingBagIcon, ChevronRightIcon, BuildingOfficeIcon  } from '@heroicons/react/24/solid'
 import Link from 'next/link';
-import { PlaidTransaction } from '../api-client';
+import { Transaction } from '../api-client';
 import CurrencyFormat from './CurrencyFormat';
 import DateFormat from './DateFormat';
 
 export interface TransactionListProps {
-  transactions: PlaidTransaction[];
+  transactions: Transaction[];
 }
 
 const TransactionList: React.FC<TransactionListProps> = ({transactions}) => {

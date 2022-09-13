@@ -2,17 +2,14 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsIn, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateRuleDTO {
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   criteria: string;
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
   isEnabled: boolean;

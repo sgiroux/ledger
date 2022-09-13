@@ -1,4 +1,4 @@
-import { ApiHideProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   Entity,
@@ -17,11 +17,13 @@ export class Rule {
   @Column()
   name: string;
 
+  @ApiProperty({ enum: ['name', 'transactionId', 'paymentChannel'] })
   @Column({
     enum: ['name', 'transactionId', 'paymentChannel'],
   })
   field: 'name' | 'transactionId' | 'paymentChannel';
 
+  @ApiProperty({ enum: ['contains', 'equals'] })
   @Column({
     enum: ['contains', 'equals'],
   })
@@ -34,7 +36,7 @@ export class Rule {
   isEnabled: boolean;
 
   @ApiHideProperty()
-  @ManyToOne(() => User, (user) => user.plaidItems, {
+  @ManyToOne(() => User, (user) => user.items, {
     nullable: false,
   })
   user: User;

@@ -20,6 +20,18 @@ export interface CreateRuleDTO {
    * @type {string}
    * @memberof CreateRuleDTO
    */
+  field: CreateRuleDTOFieldEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateRuleDTO
+   */
+  operation: CreateRuleDTOOperationEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateRuleDTO
+   */
   name: string;
   /**
    *
@@ -33,18 +45,6 @@ export interface CreateRuleDTO {
    * @memberof CreateRuleDTO
    */
   isEnabled: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof CreateRuleDTO
-   */
-  field: CreateRuleDTOFieldEnum;
-  /**
-   *
-   * @type {string}
-   * @memberof CreateRuleDTO
-   */
-  operation: CreateRuleDTOOperationEnum;
 }
 /**
  * @export

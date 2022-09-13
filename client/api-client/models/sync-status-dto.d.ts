@@ -20,11 +20,19 @@ export interface SyncStatusDTO {
    * @type {string}
    * @memberof SyncStatusDTO
    */
-  status: string;
+  status: SyncStatusDTOStatusEnum;
   /**
    *
    * @type {number}
    * @memberof SyncStatusDTO
    */
   percentComplete: number;
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export declare enum SyncStatusDTOStatusEnum {
+  RUNNING = 'RUNNING',
+  NOTRUNNING = 'NOT_RUNNING',
 }

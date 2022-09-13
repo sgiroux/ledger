@@ -11,6 +11,7 @@ import {
   PlaidLinkOptions,
 } from 'react-plaid-link';
 import { useRouter } from 'next/router';
+import { LinkTokenDTO } from '../../api-client';
 
 const Start = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -20,10 +21,10 @@ const Start = () => {
   // get a link_token from your API when component mounts
   useEffect(() => {
     const createLinkToken = async () => {
-      const response = await axios.post('/api/plaid/create_link_token');
-      const { link_token } = await response.data;
-      setToken(link_token);
-      localStorage.setItem("link_token", link_token);
+      const response = await axios.post<LinkTokenDTO>('/api/plaid/create_link_token');
+      const { token } = response.data;
+      setToken(token);
+      localStorage.setItem("linkToken", token);
     };
     createLinkToken();
   }, []);

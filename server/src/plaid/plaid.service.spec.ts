@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../app.module';
 import { TypeOrmTestingModule } from '../utils/test-utils/type-orm-testing-module';
 import { PlaidClient } from './plaid.client';
 import { PlaidService } from './plaid.service';

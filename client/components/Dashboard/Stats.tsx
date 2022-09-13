@@ -1,10 +1,10 @@
-import { PlaidTransaction } from "../../api-client";
+import { Transaction } from "../../api-client";
 import CurrencyFormat from "../CurrencyFormat";
 import DateFormat from "../DateFormat";
 
 export interface StatsProps {
   totalSpend?: number;
-  largestTransaction?: PlaidTransaction,
+  largestTransaction?: Transaction,
   costliestDay?: string;
 }
 

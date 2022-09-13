@@ -17,6 +17,18 @@
 export interface Rule {
   /**
    *
+   * @type {string}
+   * @memberof Rule
+   */
+  field: RuleFieldEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof Rule
+   */
+  operation: RuleOperationEnum;
+  /**
+   *
    * @type {number}
    * @memberof Rule
    */
@@ -29,18 +41,6 @@ export interface Rule {
   name: string;
   /**
    *
-   * @type {any}
-   * @memberof Rule
-   */
-  field: any;
-  /**
-   *
-   * @type {any}
-   * @memberof Rule
-   */
-  operation: any;
-  /**
-   *
    * @type {string}
    * @memberof Rule
    */
@@ -51,4 +51,21 @@ export interface Rule {
    * @memberof Rule
    */
   isEnabled: boolean;
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export declare enum RuleFieldEnum {
+  Name = 'name',
+  TransactionId = 'transactionId',
+  PaymentChannel = 'paymentChannel',
+}
+/**
+ * @export
+ * @enum {string}
+ */
+export declare enum RuleOperationEnum {
+  Contains = 'contains',
+  Equals = 'equals',
 }

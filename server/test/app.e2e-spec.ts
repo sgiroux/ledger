@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, VersioningType } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
 import { TypeOrmTestingModule } from '../src/utils/test-utils/type-orm-testing-module';
 
 describe('AppController (e2e)', () => {

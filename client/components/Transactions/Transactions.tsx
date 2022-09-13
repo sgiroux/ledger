@@ -1,11 +1,11 @@
 import useSWR from "swr";
-import { PlaidTransaction } from "../../api-client";
+import { Transaction } from "../../api-client";
 import Loader from "../Loader";
 import TransactionList from "../TransactionList";
 
 
 const Transactions = () => {
-  const {data, error}  = useSWR<PlaidTransaction[]>('/api/transactions');
+  const {data, error}  = useSWR<Transaction[]>('/api/transactions');
   //const error = false;
   //const data = true
 

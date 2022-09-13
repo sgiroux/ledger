@@ -15,7 +15,8 @@ import { CreateRuleDTO } from './dto/create-rule.dto';
 import { UpdateRuleDTO } from './dto/update-rule.dto';
 import { APIRequest } from '../types';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
+import { Rule } from './entities/rule.entity';
 
 @Controller('rules')
 @ApiBearerAuth()
@@ -23,11 +24,13 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 export class RulesController {
   constructor(private readonly rulesService: RulesService) {}
 
+  @ApiOkResponse({ type: Rule, isArray: true })
   @Get()
   async selectAll(@Req() request: APIRequest) {
     return await this.rulesService.selectAllByUser(request.user);
   }
 
+  @ApiOkResponse({ type: Rule })
   @Get(':id')
   async selectById(
     @Req() request: APIRequest,
@@ -36,6 +39,7 @@ export class RulesController {
     return await this.rulesService.selectById(request.user, id);
   }
 
+  @ApiOkResponse({ type: Rule })
   @Patch(':id')
   async update(
     @Req() request: APIRequest,
@@ -45,6 +49,7 @@ export class RulesController {
     return await this.rulesService.update(request.user, id, updateRuleDTO);
   }
 
+  @ApiOkResponse({ type: Rule })
   @Post()
   async create(
     @Req() request: APIRequest,
@@ -53,6 +58,7 @@ export class RulesController {
     return await this.rulesService.create(request.user, createRuleDTO);
   }
 
+  @ApiOkResponse()
   @Delete(':id')
   async delete(
     @Req() request: APIRequest,

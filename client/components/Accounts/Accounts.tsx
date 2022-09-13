@@ -2,14 +2,14 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { PlaidAccount } from "../../api-client";
+import { Account } from "../../api-client";
 import Loader from "../Loader";
 
 
 const Accounts:React.FC = () => {
 
-  const {data, error} = useSWR<PlaidAccount[]>('/api/accounts');
-  const [accounts, setAccounts] = useState<PlaidAccount[]>([]);
+  const {data, error} = useSWR<Account[]>('/api/accounts');
+  const [accounts, setAccounts] = useState<Account[]>([]);
   
   useEffect( () => {
     if (data) {
@@ -17,7 +17,7 @@ const Accounts:React.FC = () => {
     }
   }, [data])
 
-  const deleteAccount = async (account: PlaidAccount) => {
+  const deleteAccount = async (account: Account) => {
     //Remove the account
     const filteredAccount = accounts.filter((x) => x.id !== account.id);
     setAccounts(filteredAccount);

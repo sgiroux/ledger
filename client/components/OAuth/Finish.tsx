@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/router';
 
 const Finish = () => {
-  const link_token = localStorage.getItem("link_token");
+  const link_token = localStorage.getItem("linkToken");
   const router = useRouter();
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>((publicToken, metadata) => {

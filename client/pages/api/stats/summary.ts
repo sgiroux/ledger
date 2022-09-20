@@ -23,7 +23,8 @@ export default async function handler(
 async function httpGet(req: NextApiRequest, res: NextApiResponse) {
   try {
     const api = createDefaultAPI(req);
-    const response = await api.statsControllerSummary();
+    const { dateRange } = req.query;
+    const response = await api.statsControllerSummary(dateRange as string); // TODO: S.G. Fix this casting
     res.json(response.data);
   } catch (err) {
     handleAPIError(res, err);

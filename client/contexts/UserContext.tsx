@@ -12,25 +12,25 @@ interface UserContextProps {
 export const UserContext = ({ children, user }: UserContextProps) => {
   const { data, error } = UseUser(user);
   const router = useRouter();
-  
+
   if (!data && !error) {
-    return <></>
+    return <></>;
   }
 
   if (error) {
     if (!router.pathname.match(/(login)/)) {
-      logger.log("User Not Found, Redirecting");
-      router.replace("/login");
+      logger.log('User Not Found, Redirecting');
+      router.replace('/login');
       return <></>;
     }
   }
 
-  if (data && (router.pathname.match(/(login)/))) {
-    logger.log("User Found But On Login Page, Redirecting");
-    router.replace("/dashboard");
+  if (data && router.pathname.match(/(login)/)) {
+    logger.log('User Found But On Login Page, Redirecting');
+    router.replace('/dashboard');
     return <></>;
   }
 
-  logger.log("User Found, Rendering");
+  logger.log('User Found, Rendering');
   return <>{children}</>;
 };

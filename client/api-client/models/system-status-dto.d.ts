@@ -15,10 +15,10 @@
  * @interface SystemStatusDTO
  */
 export interface SystemStatusDTO {
-  /**
-   *
-   * @type {boolean}
-   * @memberof SystemStatusDTO
-   */
-  isInitialized: boolean;
+    /**
+     *
+     * @type {boolean}
+     * @memberof SystemStatusDTO
+     */
+    isInitialized: boolean;
 }

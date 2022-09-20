@@ -5,11 +5,8 @@ export interface DateFormatProps {
   format: 'MMM Do' | 'MMM';
 }
 
-const DateFormat:React.FC<DateFormatProps> = ({date, format}) => {
-  return (
-    <>{Moment(date).format(format)}</>
-  )
-
-}
+const DateFormat: React.FC<DateFormatProps> = ({ date, format }) => {
+  return <>{Moment(date).format(format)}</>;
+};
 
 export default DateFormat;

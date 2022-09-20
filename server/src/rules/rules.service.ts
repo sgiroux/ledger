@@ -1,10 +1,7 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { DuplicateRuleNameException } from '../exceptions/duplicateRuleNameException';
 import { User } from '../users/entities/user.entity';
 import { CreateRuleDTO } from './dto/create-rule.dto';
 import { UpdateRuleDTO } from './dto/update-rule.dto';
@@ -17,47 +14,59 @@ export class RulesService {
     private ruleRepository: Repository<Rule>,
   ) {}
 
-  async delete(user: User, id: number) {
-    const rule = await this.selectById(user, id);
+  async delete(userId: number, id: number) {
+    const rule = await this.selectById(userId, id);
 
     await this.ruleRepository.remove(rule);
   }
 
-  async create(user: User, createRuleDTO: CreateRuleDTO) {
-    // Name check
+  async duplicateNameCheck(userId: number, ruleName: string) {
     const existingRule = await this.ruleRepository.findOne({
       where: {
-        name: createRuleDTO.name,
+        name: ruleName,
         user: {
-          id: user.id,
+          id: userId,
         },
       },
     });
 
     if (existingRule) {
-      throw new BadRequestException('Rule name already exists');
+      throw new DuplicateRuleNameException('Rule name already exists');
     }
+  }
+
+  async create(userId: number, createRuleDTO: CreateRuleDTO) {
+    // Name check
+    await this.duplicateNameCheck(userId, createRuleDTO.name);
 
     const rule = this.ruleRepository.create(createRuleDTO);
+
+    // TODO: S.G. This is ugly and should be fixed.
+    const user = new User();
+    user.id = userId;
     rule.user = user;
 
     return await this.ruleRepository.save(rule);
   }
 
-  async update(user: User, id: number, updateRuleDTO: UpdateRuleDTO) {
-    const rule = await this.selectById(user, id);
+  async update(userId: number, id: number, updateRuleDTO: UpdateRuleDTO) {
+    if (updateRuleDTO.name) {
+      await this.duplicateNameCheck(userId, updateRuleDTO.name);
+    }
+
+    const rule = await this.selectById(userId, id);
     return await this.ruleRepository.save({
       ...rule,
       ...updateRuleDTO,
     });
   }
 
-  async selectById(user: User, id: number) {
+  async selectById(userId: number, id: number) {
     const rule = await this.ruleRepository.findOne({
       where: {
         id: id,
         user: {
-          id: user.id,
+          id: userId,
         },
       },
     });
@@ -69,11 +78,11 @@ export class RulesService {
     return rule;
   }
 
-  async selectAllByUser(user: User) {
+  async selectAllByUserId(userId: number) {
     return await this.ruleRepository.find({
       where: {
         user: {
-          id: user.id,
+          id: userId,
         },
       },
     });

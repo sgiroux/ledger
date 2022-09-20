@@ -15,57 +15,57 @@
  * @interface Rule
  */
 export interface Rule {
-  /**
-   *
-   * @type {string}
-   * @memberof Rule
-   */
-  field: RuleFieldEnum;
-  /**
-   *
-   * @type {string}
-   * @memberof Rule
-   */
-  operation: RuleOperationEnum;
-  /**
-   *
-   * @type {number}
-   * @memberof Rule
-   */
-  id: number;
-  /**
-   *
-   * @type {string}
-   * @memberof Rule
-   */
-  name: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Rule
-   */
-  criteria: string;
-  /**
-   *
-   * @type {boolean}
-   * @memberof Rule
-   */
-  isEnabled: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof Rule
+     */
+    field: RuleFieldEnum;
+    /**
+     *
+     * @type {string}
+     * @memberof Rule
+     */
+    operation: RuleOperationEnum;
+    /**
+     *
+     * @type {number}
+     * @memberof Rule
+     */
+    id: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Rule
+     */
+    name: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Rule
+     */
+    criteria: string;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Rule
+     */
+    isEnabled: boolean;
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export declare enum RuleFieldEnum {
-  Name = 'name',
-  TransactionId = 'transactionId',
-  PaymentChannel = 'paymentChannel',
+    Name = "name",
+    TransactionId = "transactionId",
+    PaymentChannel = "paymentChannel"
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export declare enum RuleOperationEnum {
-  Contains = 'contains',
-  Equals = 'equals',
+    Contains = "contains",
+    Equals = "equals"
 }

@@ -66,7 +66,7 @@ export class TransactionsService {
   }
 
   private async applyRules(user: User, transactions: Transaction[]) {
-    const rules = await this.rulesService.selectAllByUser(user);
+    const rules = await this.rulesService.selectAllByUserId(user.id);
 
     let filteredTransactions = transactions;
     // Run each rule

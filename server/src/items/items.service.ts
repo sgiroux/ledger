@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Item } from './entities/item.entity';
-import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class ItemsService {
@@ -13,11 +12,11 @@ export class ItemsService {
     private itemRepository: Repository<Item>,
   ) {}
 
-  async selectAllByUser(user: User): Promise<Item[]> {
+  async selectAllByUserId(userId: number): Promise<Item[]> {
     return await this.itemRepository.find({
       where: {
         user: {
-          id: user.id,
+          id: userId,
         },
       },
     });

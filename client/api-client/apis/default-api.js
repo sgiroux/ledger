@@ -572,14 +572,19 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
         },
         /**
          *
+         * @param {string} dateRange
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        statsControllerSummary: function (options) {
+        statsControllerSummary: function (dateRange, options) {
             if (options === void 0) { options = {}; }
             return __awaiter(_this, void 0, void 0, function () {
                 var localVarPath, localVarUrlObj, baseOptions, localVarRequestOptions, localVarHeaderParameter, localVarQueryParameter, query, key, key, headersFromBaseOptions;
                 return __generator(this, function (_a) {
+                    // verify required parameter 'dateRange' is not null or undefined
+                    if (dateRange === null || dateRange === undefined) {
+                        throw new base_1.RequiredError('dateRange', 'Required parameter dateRange was null or undefined when calling statsControllerSummary.');
+                    }
                     localVarPath = "/stats/summary";
                     localVarUrlObj = new URL(localVarPath, 'https://example.com');
                     if (configuration) {
@@ -588,6 +593,10 @@ exports.DefaultApiAxiosParamCreator = function (configuration) {
                     localVarRequestOptions = __assign(__assign({ method: 'GET' }, baseOptions), options);
                     localVarHeaderParameter = {};
                     localVarQueryParameter = {};
+                    // authentication bearer required
+                    if (dateRange !== undefined) {
+                        localVarQueryParameter['dateRange'] = dateRange;
+                    }
                     query = new URLSearchParams(localVarUrlObj.search);
                     for (key in localVarQueryParameter) {
                         query.set(key, localVarQueryParameter[key]);
@@ -1176,15 +1185,16 @@ exports.DefaultApiFp = function (configuration) {
         },
         /**
          *
+         * @param {string} dateRange
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        statsControllerSummary: function (options) {
+        statsControllerSummary: function (dateRange, options) {
             return __awaiter(this, void 0, void 0, function () {
                 var localVarAxiosArgs;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).statsControllerSummary(options)];
+                        case 0: return [4 /*yield*/, exports.DefaultApiAxiosParamCreator(configuration).statsControllerSummary(dateRange, options)];
                         case 1:
                             localVarAxiosArgs = _a.sent();
                             return [2 /*return*/, function (axios, basePath) {
@@ -1525,13 +1535,14 @@ exports.DefaultApiFactory = function (configuration, basePath, axios) {
         },
         /**
          *
+         * @param {string} dateRange
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        statsControllerSummary: function (options) {
+        statsControllerSummary: function (dateRange, options) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, exports.DefaultApiFp(configuration).statsControllerSummary(options).then(function (request) { return request(axios, basePath); })];
+                    return [2 /*return*/, exports.DefaultApiFp(configuration).statsControllerSummary(dateRange, options).then(function (request) { return request(axios, basePath); })];
                 });
             });
         },
@@ -1815,15 +1826,16 @@ var DefaultApi = /** @class */ (function (_super) {
     };
     /**
      *
+     * @param {string} dateRange
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    DefaultApi.prototype.statsControllerSummary = function (options) {
+    DefaultApi.prototype.statsControllerSummary = function (dateRange, options) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, exports.DefaultApiFp(this.configuration).statsControllerSummary(options).then(function (request) { return request(_this.axios, _this.basePath); })];
+                return [2 /*return*/, exports.DefaultApiFp(this.configuration).statsControllerSummary(dateRange, options).then(function (request) { return request(_this.axios, _this.basePath); })];
             });
         });
     };

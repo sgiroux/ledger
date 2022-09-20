@@ -1,9 +1,7 @@
 import { DataSource } from 'typeorm';
 import type { DataSourceOptions } from 'typeorm';
 
-const database = process.env.CONFIG_DIRECTORY
-  ? `${process.env.CONFIG_DIRECTORY}/db/db.sqlite3`
-  : 'config/db/db.sqlite3';
+const database = `${process.env.CONFIG_DIRECTORY || './config/'}/db/db.sqlite3`;
 
 const devConfig: DataSourceOptions = {
   type: 'better-sqlite3',

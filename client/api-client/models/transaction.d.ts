@@ -16,91 +16,91 @@ import { Account } from './account';
  * @interface Transaction
  */
 export interface Transaction {
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  paymentChannel: TransactionPaymentChannelEnum;
-  /**
-   *
-   * @type {number}
-   * @memberof Transaction
-   */
-  id: number;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  name: string;
-  /**
-   *
-   * @type {number}
-   * @memberof Transaction
-   */
-  amount: number;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  isoCurrencyCode: string | null;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  transactionId: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  date: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  datetime: string | null;
-  /**
-   *
-   * @type {boolean}
-   * @memberof Transaction
-   */
-  pending: boolean;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  categoryId: string | null;
-  /**
-   *
-   * @type {Array<string>}
-   * @memberof Transaction
-   */
-  category: Array<string> | null;
-  /**
-   *
-   * @type {string}
-   * @memberof Transaction
-   */
-  merchantName: string | null;
-  /**
-   *
-   * @type {Account}
-   * @memberof Transaction
-   */
-  account: Account;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    paymentChannel: TransactionPaymentChannelEnum;
+    /**
+     *
+     * @type {number}
+     * @memberof Transaction
+     */
+    id: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    name: string;
+    /**
+     *
+     * @type {number}
+     * @memberof Transaction
+     */
+    amount: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    isoCurrencyCode: string | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    transactionId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    date: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    datetime: string | null;
+    /**
+     *
+     * @type {boolean}
+     * @memberof Transaction
+     */
+    pending: boolean;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    categoryId: string | null;
+    /**
+     *
+     * @type {Array<string>}
+     * @memberof Transaction
+     */
+    category: Array<string> | null;
+    /**
+     *
+     * @type {string}
+     * @memberof Transaction
+     */
+    merchantName: string | null;
+    /**
+     *
+     * @type {Account}
+     * @memberof Transaction
+     */
+    account: Account;
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export declare enum TransactionPaymentChannelEnum {
-  Online = 'online',
-  InStore = 'in store',
-  Other = 'other',
+    Online = "online",
+    InStore = "in store",
+    Other = "other"
 }

@@ -15,24 +15,24 @@
  * @interface SyncStatusDTO
  */
 export interface SyncStatusDTO {
-  /**
-   *
-   * @type {string}
-   * @memberof SyncStatusDTO
-   */
-  status: SyncStatusDTOStatusEnum;
-  /**
-   *
-   * @type {number}
-   * @memberof SyncStatusDTO
-   */
-  percentComplete: number;
+    /**
+     *
+     * @type {string}
+     * @memberof SyncStatusDTO
+     */
+    status: SyncStatusDTOStatusEnum;
+    /**
+     *
+     * @type {number}
+     * @memberof SyncStatusDTO
+     */
+    percentComplete: number;
 }
 /**
- * @export
- * @enum {string}
- */
+    * @export
+    * @enum {string}
+    */
 export declare enum SyncStatusDTOStatusEnum {
-  RUNNING = 'RUNNING',
-  NOTRUNNING = 'NOT_RUNNING',
+    RUNNING = "RUNNING",
+    NOTRUNNING = "NOT_RUNNING"
 }

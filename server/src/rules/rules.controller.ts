@@ -27,7 +27,7 @@ export class RulesController {
   @ApiOkResponse({ type: Rule, isArray: true })
   @Get()
   async selectAll(@Req() request: APIRequest) {
-    return await this.rulesService.selectAllByUser(request.user);
+    return await this.rulesService.selectAllByUserId(request.user.id);
   }
 
   @ApiOkResponse({ type: Rule })
@@ -36,7 +36,7 @@ export class RulesController {
     @Req() request: APIRequest,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return await this.rulesService.selectById(request.user, id);
+    return await this.rulesService.selectById(request.user.id, id);
   }
 
   @ApiOkResponse({ type: Rule })
@@ -46,7 +46,7 @@ export class RulesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateRuleDTO: UpdateRuleDTO,
   ) {
-    return await this.rulesService.update(request.user, id, updateRuleDTO);
+    return await this.rulesService.update(request.user.id, id, updateRuleDTO);
   }
 
   @ApiOkResponse({ type: Rule })
@@ -55,7 +55,7 @@ export class RulesController {
     @Req() request: APIRequest,
     @Body() createRuleDTO: CreateRuleDTO,
   ) {
-    return await this.rulesService.create(request.user, createRuleDTO);
+    return await this.rulesService.create(request.user.id, createRuleDTO);
   }
 
   @ApiOkResponse()
@@ -64,6 +64,6 @@ export class RulesController {
     @Req() request: APIRequest,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    return this.rulesService.delete(request.user, id);
+    return this.rulesService.delete(request.user.id, id);
   }
 }

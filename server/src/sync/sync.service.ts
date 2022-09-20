@@ -168,10 +168,10 @@ export class SyncService {
       });
 
       const user = await this.usersService.getUserById(userId);
-      const items = await this.itemsService.selectAllByUser(user);
+      const items = await this.itemsService.selectAllByUserId(user.id);
 
       for (const item of items) {
-        const accounts = await this.accountsService.selectAllByItem(item);
+        const accounts = await this.accountsService.selectAllByItemId(item.id);
 
         if (accounts.length === 0) {
           this.logger.warn(

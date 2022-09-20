@@ -1,18 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid';
+import { Configuration, PlaidApi } from 'plaid';
+import process from 'process';
+import {
+  EnvironmentVariable,
+  getEnvironmentVariable,
+} from '../utils/configuration-util';
 
 @Injectable()
 export class PlaidClient {
   public readonly client;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor() {
     const config = new Configuration({
-      basePath: PlaidEnvironments[this.configService.get('PLAID_ENVIRONMENT')],
+      basePath: getEnvironmentVariable(EnvironmentVariable.PLAID_ENVIRONMENT),
       baseOptions: {
         headers: {
-          'PLAID-CLIENT-ID': this.configService.get('PLAID_CLIENT_ID'),
-          'PLAID-SECRET': this.configService.get('PLAID_SECRET'),
+          'PLAID-CLIENT-ID': getEnvironmentVariable(
+            EnvironmentVariable.PLAID_CLIENT_ID,
+          ),
+          'PLAID-SECRET': getEnvironmentVariable(
+            EnvironmentVariable.PLAID_SECRET,
+          ),
         },
       },
     });

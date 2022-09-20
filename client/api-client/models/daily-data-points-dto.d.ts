@@ -15,16 +15,16 @@
  * @interface DailyDataPointsDTO
  */
 export interface DailyDataPointsDTO {
-  /**
-   *
-   * @type {string}
-   * @memberof DailyDataPointsDTO
-   */
-  date: string;
-  /**
-   *
-   * @type {number}
-   * @memberof DailyDataPointsDTO
-   */
-  value: number;
+    /**
+     *
+     * @type {string}
+     * @memberof DailyDataPointsDTO
+     */
+    date: string;
+    /**
+     *
+     * @type {number}
+     * @memberof DailyDataPointsDTO
+     */
+    value: number;
 }

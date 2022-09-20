@@ -18,5 +18,8 @@ RUN yarn build
 # remove development dependencies
 RUN yarn install --production --ignore-scripts
 
+# TODO: Why
+RUN cd /app/node_modules/better-sqlite3 && yarn
+
 #Remove src, test, and config folders if they exist
-RUN rm -rf src test config
+RUN rm -rf src test config .env

@@ -4,7 +4,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
-import { LoggingInterceptor } from './shared/interceptors/logging-interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -13,7 +12,7 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
 
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
-  app.useGlobalInterceptors(new LoggingInterceptor());
+  //app.useGlobalInterceptors(new LoggingInterceptor());
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 

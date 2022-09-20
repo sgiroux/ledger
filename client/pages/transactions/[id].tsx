@@ -1,32 +1,33 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import TransactionDetail from "../../components/Transactions/TransactionDetail";
-import { UserContext } from "../../contexts/UserContext";
-import { getUserSSR } from "../../utils/server-side-render-utils";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import PageWrapper from '../../components/PageWrapper/PageWrapper';
+import TransactionDetail from '../../components/Transactions/TransactionDetail';
+import { UserContext } from '../../contexts/UserContext';
+import { getUserSSR } from '../../utils/server-side-render-utils';
 
-
-const TransactionPage:React.FC = ({user}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const TransactionPage: React.FC = ({
+  user,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const {id} = router.query;
+  const { id } = router.query;
 
   if (!id) {
-    return (
-      <>Boom</>
-    )
+    return <>Boom</>;
   }
 
   return (
     <UserContext user={user}>
-      <PageWrapper page="Transactions">
+      <PageWrapper page='Transactions'>
         <TransactionDetail id={id.toString()} />
       </PageWrapper>
     </UserContext>
-  )
-}
+  );
+};
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
   const user = await getUserSSR(context.req.cookies);
   if (!user) {
     return {
@@ -34,14 +35,14 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         destination: '/login',
         permanent: false,
       },
-    }
+    };
   }
 
   return {
     props: {
       user,
     },
-  }
-}
+  };
+};
 
 export default TransactionPage;

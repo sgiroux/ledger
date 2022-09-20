@@ -17,46 +17,46 @@ import { User } from './user';
  * @interface Item
  */
 export interface Item {
-  /**
-   *
-   * @type {number}
-   * @memberof Item
-   */
-  id: number;
-  /**
-   *
-   * @type {string}
-   * @memberof Item
-   */
-  itemId: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Item
-   */
-  updateType: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Item
-   */
-  accessToken: string;
-  /**
-   *
-   * @type {string}
-   * @memberof Item
-   */
-  transactionSyncCursor?: string;
-  /**
-   *
-   * @type {User}
-   * @memberof Item
-   */
-  user: User;
-  /**
-   *
-   * @type {Array<Account>}
-   * @memberof Item
-   */
-  accounts: Array<Account>;
+    /**
+     *
+     * @type {number}
+     * @memberof Item
+     */
+    id: number;
+    /**
+     *
+     * @type {string}
+     * @memberof Item
+     */
+    itemId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Item
+     */
+    updateType: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Item
+     */
+    accessToken: string;
+    /**
+     *
+     * @type {string}
+     * @memberof Item
+     */
+    transactionSyncCursor?: string;
+    /**
+     *
+     * @type {User}
+     * @memberof Item
+     */
+    user: User;
+    /**
+     *
+     * @type {Array<Account>}
+     * @memberof Item
+     */
+    accounts: Array<Account>;
 }

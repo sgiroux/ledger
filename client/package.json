@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"./**/*.ts\""
+    "format": "prettier --write \"./**/*.ts\" \"./**/*.tsx\""
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
@@ -17,6 +17,7 @@
     "cookies": "^0.8.0",
     "moment": "^2.29.4",
     "next": "12.2.4",
+    "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-plaid-link": "^3.3.2",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@types/cookies": "^0.7.7",
     "@types/node": "18.6.4",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.16",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.8",

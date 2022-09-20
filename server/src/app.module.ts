@@ -6,11 +6,9 @@ import {
 } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { PlaidModule } from './plaid/plaid.module';
-import { ConfigurationUtil } from './shared/configuration-util';
 import { ItemsModule } from './items/items.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { OauthModule } from './oauth/oauth.module';
@@ -24,39 +22,63 @@ import { StatsModule } from './stats/stats.module';
 import { RulesModule } from './rules/rules.module';
 import { getNestDataSource } from './datasource';
 import { SystemModule } from './system/system.module';
+import { LoggerMiddleware } from './shared/middleware/logging.middleware';
+import { v4 as uuidv4 } from 'uuid';
+import { ReqId } from 'pino-http';
+import { IncomingMessage } from 'http';
+import { validateEnvironmentVariables } from './utils/configuration-util';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     LoggerModule.forRoot({
       pinoHttp: {
         level: 'debug',
         customProps: () => ({
           context: 'HTTP',
         }),
+        genReqId: (req: IncomingMessage): ReqId => {
+          const id = uuidv4();
+          req.headers['X-Request-Id'] = id;
+
+          return id;
+        },
         transport: {
           target: 'pino-pretty',
           options: {
-            //destination: `${__dirname}/combined.log`,
+            destination: `${
+              process.env.CONFIG_DIRECTORY || './config/'
+            }/combined.log`,
             mkdir: true,
             singleLine: true,
             colorize: true,
             sync: true,
             levelFirst: false,
             translateTime: "yyyy-MM-dd'T'HH:mm:ss.l'Z'",
-            messageFormat:
-              'df{req.headers["x-correlation-id"]} [{context}] {msg}',
+            messageFormat: '{req.headers.X-Request-Id} [{context}] {msg}',
             ignore: 'pid,hostname,context,res,req, responseTime', //req,
             errorLikeObjectKeys: ['err', 'error'],
           },
+        },
+        useLevel: 'debug',
+        // Define a custom receive message
+        customReceivedMessage: function (req, _res) {
+          return `Start - path: ${req.url} | method: ${req.method}`;
+          //return 'request received: ' + req.method
+        },
+        customSuccessMessage: function (req, res) {
+          if (res.statusCode === 404) {
+            return 'resource not found';
+          }
+          return `${req.method} completed`;
         },
       },
     }),
     CacheModule.register({
       isGlobal: true,
-    }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      validate: ConfigurationUtil.validateConfig,
     }),
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot({
@@ -87,6 +109,8 @@ import { SystemModule } from './system/system.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    //consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
+
+validateEnvironmentVariables();

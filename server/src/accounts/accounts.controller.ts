@@ -14,18 +14,18 @@ export class AccountsController {
   @ApiOkResponse({ type: Account, isArray: true })
   @Get()
   async selectAll(@Req() request: APIRequest) {
-    return await this.accountsService.selectAllByUser(request.user);
+    return await this.accountsService.selectAllByUserId(request.user.id);
   }
 
   @ApiOkResponse({ type: Account })
   @Get(':id')
   async selectById(@Req() request: APIRequest, @Param('id') id: number) {
-    return await this.accountsService.selectById(request.user, id);
+    return await this.accountsService.selectById(request.user.id, id);
   }
 
   @ApiOkResponse()
   @Delete(':id')
   async delete(@Req() request: APIRequest, @Param('id') id: number) {
-    return await this.accountsService.deleteById(request.user, id);
+    return await this.accountsService.deleteById(request.user.id, id);
   }
 }

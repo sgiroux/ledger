@@ -15,16 +15,16 @@
  * @interface CreateUserDTO
  */
 export interface CreateUserDTO {
-  /**
-   *
-   * @type {string}
-   * @memberof CreateUserDTO
-   */
-  email: string;
-  /**
-   *
-   * @type {string}
-   * @memberof CreateUserDTO
-   */
-  password: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateUserDTO
+     */
+    email: string;
+    /**
+     *
+     * @type {string}
+     * @memberof CreateUserDTO
+     */
+    password: string;
 }

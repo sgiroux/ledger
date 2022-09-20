@@ -17,34 +17,34 @@ import { Rule } from './rule';
  * @interface User
  */
 export interface User {
-  /**
-   *
-   * @type {number}
-   * @memberof User
-   */
-  id: number;
-  /**
-   *
-   * @type {string}
-   * @memberof User
-   */
-  email: string;
-  /**
-   *
-   * @type {string}
-   * @memberof User
-   */
-  password: string;
-  /**
-   *
-   * @type {Array<Item>}
-   * @memberof User
-   */
-  items: Array<Item>;
-  /**
-   *
-   * @type {Array<Rule>}
-   * @memberof User
-   */
-  rules: Array<Rule>;
+    /**
+     *
+     * @type {number}
+     * @memberof User
+     */
+    id: number;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
+    email: string;
+    /**
+     *
+     * @type {string}
+     * @memberof User
+     */
+    password: string;
+    /**
+     *
+     * @type {Array<Item>}
+     * @memberof User
+     */
+    items: Array<Item>;
+    /**
+     *
+     * @type {Array<Rule>}
+     * @memberof User
+     */
+    rules: Array<Rule>;
 }

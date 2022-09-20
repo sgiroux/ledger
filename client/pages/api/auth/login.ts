@@ -25,10 +25,6 @@ async function httpPost(req: NextApiRequest, res: NextApiResponse) {
   try {
     const api = createDefaultAPI(req);
     const response = await api.authControllerLogin(req.body);
-
-    console.log(response.data);
-    console.log(response.data.accessToken);
-
     const cookies = new Cookies(req, res);
 
     cookies.set('auth-token', response.data.accessToken, {

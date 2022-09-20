@@ -15,10 +15,10 @@
  * @interface LinkTokenDTO
  */
 export interface LinkTokenDTO {
-  /**
-   *
-   * @type {string}
-   * @memberof LinkTokenDTO
-   */
-  token: string;
+    /**
+     *
+     * @type {string}
+     * @memberof LinkTokenDTO
+     */
+    token: string;
 }

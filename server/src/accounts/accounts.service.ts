@@ -1,7 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Item } from '../items/entities/item.entity';
-import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Account } from './entities/account.entity';
 
@@ -12,21 +10,21 @@ export class AccountsService {
     private accountsRepository: Repository<Account>,
   ) {}
 
-  async deleteById(user: User, id: number) {
-    const account = await this.selectById(user, id);
+  async deleteById(userId: number, id: number) {
+    const account = await this.selectById(userId, id);
 
     await this.accountsRepository.remove(account);
 
     //TODO: Delete the PlaidItem if there are no longer any accounts associated with it.
   }
 
-  async selectById(user: User, id: number) {
+  async selectById(userId: number, id: number) {
     const account = await this.accountsRepository.findOne({
       where: {
         id: id,
         item: {
           user: {
-            id: user.id,
+            id: userId,
           },
         },
       },
@@ -39,22 +37,22 @@ export class AccountsService {
     return account;
   }
 
-  async selectAllByItem(item: Item): Promise<Account[]> {
+  async selectAllByItemId(itemId: number): Promise<Account[]> {
     return this.accountsRepository.find({
       where: {
         item: {
-          id: item.id,
+          id: itemId,
         },
       },
     });
   }
 
-  async selectAllByUser(user: User): Promise<Account[]> {
+  async selectAllByUserId(userId: number): Promise<Account[]> {
     return this.accountsRepository.find({
       where: {
         item: {
           user: {
-            id: user.id,
+            id: userId,
           },
         },
       },

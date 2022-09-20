@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Start the first process
-cd server && yarn start:prod &
+cd /app/server && yarn start:prod &
 
   
 # Start the second process
 #./my_second_process &
-cd client && yarn start &
+cd /app/client && yarn start &
   
 # Wait for any process to exit
 wait -n

@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 
-
-
 import {
   usePlaidLink,
   PlaidLinkOnSuccess,
@@ -17,38 +15,38 @@ const Start = () => {
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
 
-
   // get a link_token from your API when component mounts
   useEffect(() => {
     const createLinkToken = async () => {
-      const response = await axios.post<LinkTokenDTO>('/api/plaid/create_link_token');
+      const response = await axios.post<LinkTokenDTO>(
+        '/api/plaid/create_link_token',
+      );
       const { token } = response.data;
       setToken(token);
-      localStorage.setItem("linkToken", token);
+      localStorage.setItem('linkToken', token);
     };
     createLinkToken();
   }, []);
 
+  const onSuccess = useCallback<PlaidLinkOnSuccess>(
+    (publicToken, metadata) => {
+      // send public_token to your server
+      // https://plaid.com/docs/api/tokens/#token-exchange-flow
+      console.log(publicToken, metadata);
 
-  const onSuccess = useCallback<PlaidLinkOnSuccess>((publicToken, metadata) => {
-    // send public_token to your server
-    // https://plaid.com/docs/api/tokens/#token-exchange-flow
-    console.log(publicToken, metadata);
+      const exchangeToken = async () => {
+        const response = await axios.post('/api/plaid/exchange_token', {
+          publicToken: publicToken,
+        });
 
-    const exchangeToken = async () => {
-      const response = await axios.post(
-        '/api/plaid/exchange_token', {
-          'publicToken': publicToken
-        }
-      )
+        await axios.post('/api/sync/start');
+        router.replace('/link/sync');
+      };
+      exchangeToken();
+    },
+    [router],
+  );
 
-      await axios.post('/api/sync/start');
-      router.replace("/link/sync");
-    };
-    exchangeToken();
-
-  }, [router]);
-  
   const onEvent = useCallback<PlaidLinkOnEvent>((eventName, metadata) => {
     // log onEvent callbacks from Link
     // https://plaid.com/docs/link/web/#onevent
@@ -76,17 +74,21 @@ const Start = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Ready to connect?</span>
-          <span className="block text-indigo-600">Connect your account using Plaid.</span>
+      <div className='max-w-7xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20'>
+        <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+          <span className='block'>Ready to connect?</span>
+          <span className='block text-indigo-600'>
+            Connect your account using Plaid.
+          </span>
         </h2>
-        <div className="mt-8 flex">
-          <div className="inline-flex rounded-md shadow">
+        <div className='mt-8 flex'>
+          <div className='inline-flex rounded-md shadow'>
             <button
-              onClick={() => {open()}}
+              onClick={() => {
+                open();
+              }}
               disabled={!ready}
-              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+              className='inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700'
             >
               Connect
             </button>
@@ -103,11 +105,6 @@ const Start = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Start;
-
-
-
-
-

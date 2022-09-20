@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TransactionsService } from '../transactions/transactions.service';
 import { User } from '../users/entities/user.entity';
 import { DailyDataPointsDTO } from './dto/daily-data-point.dto';
-import { SummaryStatsDTO } from './dto/summary-stats.dto';
+import { SummaryDateRange, SummaryStatsDTO } from './dto/summary-stats.dto';
 import * as moment from 'moment';
 import { AccountsService } from '../accounts/accounts.service';
 import { RulesService } from '../rules/rules.service';
@@ -15,16 +15,37 @@ export class StatsService {
     private readonly rulesService: RulesService,
   ) {}
 
-  async getSummaryStats(user: User) {
+  private calculateStartDate(dateRange: SummaryDateRange): string {
+    switch (dateRange) {
+      case SummaryDateRange.LAST_7_DAYS:
+        return moment().subtract(7, 'days').format('YYYY-MM-DD');
+      case SummaryDateRange.LAST_14_DAYS:
+        return moment().subtract(14, 'days').format('YYYY-MM-DD');
+      case SummaryDateRange.LAST_30_DAYS:
+        return moment().subtract(30, 'days').format('YYYY-MM-DD');
+      case SummaryDateRange.LAST_60_DAYS:
+        return moment().subtract(60, 'days').format('YYYY-MM-DD');
+      case SummaryDateRange.LAST_90_DAYS:
+        return moment().subtract(90, 'days').format('YYYY-MM-DD');
+      default:
+        throw new Error(`Invalud DateRange: ${dateRange}`);
+    }
+  }
+
+  private calculateEndDate(): string {
+    return moment().format('YYYY-MM-DD');
+  }
+
+  async getSummaryStats(user: User, dateRange: SummaryDateRange) {
     const summaryStatsDTO = new SummaryStatsDTO();
-    const endDate = moment().format('YYYY-MM-DD');
-    const startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
+    const endDateStr = this.calculateEndDate();
+    const startDateStr = this.calculateStartDate(dateRange);
 
     // Get number of accounts
-    const accounts = await this.accountsService.selectAllByUser(user);
+    const accounts = await this.accountsService.selectAllByUserId(user.id);
     summaryStatsDTO.numAccounts = accounts.length;
 
-    const rules = await this.rulesService.selectAllByUser(user);
+    const rules = await this.rulesService.selectAllByUserId(user.id);
     summaryStatsDTO.numRules = rules.length;
 
     //get the list of transactions
@@ -33,7 +54,7 @@ export class StatsService {
       true,
     );
     const lastThirtyDaysOfTransaction = transactions.filter((transaction) => {
-      return transaction.date >= startDate && transaction.date <= endDate;
+      return transaction.date >= startDateStr && transaction.date <= endDateStr;
     });
 
     // Group amount by keys

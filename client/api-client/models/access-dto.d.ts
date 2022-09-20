@@ -15,10 +15,10 @@
  * @interface AccessDTO
  */
 export interface AccessDTO {
-  /**
-   *
-   * @type {string}
-   * @memberof AccessDTO
-   */
-  accessToken: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AccessDTO
+     */
+    accessToken: string;
 }

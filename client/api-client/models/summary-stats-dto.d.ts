@@ -17,46 +17,63 @@ import { Transaction } from './transaction';
  * @interface SummaryStatsDTO
  */
 export interface SummaryStatsDTO {
-  /**
-   *
-   * @type {number}
-   * @memberof SummaryStatsDTO
-   */
-  numRules: number;
-  /**
-   *
-   * @type {number}
-   * @memberof SummaryStatsDTO
-   */
-  numAccounts: number;
-  /**
-   *
-   * @type {number}
-   * @memberof SummaryStatsDTO
-   */
-  totalSpend: number;
-  /**
-   *
-   * @type {string}
-   * @memberof SummaryStatsDTO
-   */
-  costliestDate?: string;
-  /**
-   *
-   * @type {Transaction}
-   * @memberof SummaryStatsDTO
-   */
-  largestTransaction?: Transaction;
-  /**
-   *
-   * @type {Array<Transaction>}
-   * @memberof SummaryStatsDTO
-   */
-  transactions: Array<Transaction>;
-  /**
-   *
-   * @type {Array<DailyDataPointsDTO>}
-   * @memberof SummaryStatsDTO
-   */
-  dailyDataPoints: Array<DailyDataPointsDTO>;
+    /**
+     *
+     * @type {string}
+     * @memberof SummaryStatsDTO
+     */
+    dateRange: SummaryStatsDTODateRangeEnum;
+    /**
+     *
+     * @type {number}
+     * @memberof SummaryStatsDTO
+     */
+    numRules: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SummaryStatsDTO
+     */
+    numAccounts: number;
+    /**
+     *
+     * @type {number}
+     * @memberof SummaryStatsDTO
+     */
+    totalSpend: number;
+    /**
+     *
+     * @type {string}
+     * @memberof SummaryStatsDTO
+     */
+    costliestDate?: string;
+    /**
+     *
+     * @type {Transaction}
+     * @memberof SummaryStatsDTO
+     */
+    largestTransaction?: Transaction;
+    /**
+     *
+     * @type {Array<Transaction>}
+     * @memberof SummaryStatsDTO
+     */
+    transactions: Array<Transaction>;
+    /**
+     *
+     * @type {Array<DailyDataPointsDTO>}
+     * @memberof SummaryStatsDTO
+     */
+    dailyDataPoints: Array<DailyDataPointsDTO>;
+}
+/**
+    * @export
+    * @enum {string}
+    */
+export declare enum SummaryStatsDTODateRangeEnum {
+    _7DAYS = "LAST_7_DAYS",
+    _14DAYS = "LAST_14_DAYS",
+    _30DAYS = "LAST_30_DAYS",
+    _60DAYS = "LAST_60_DAYS",
+    _90DAYS = "LAST_90_DAYS"
 }

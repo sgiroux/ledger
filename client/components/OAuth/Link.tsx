@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import React, { useCallback } from 'react';
 
@@ -11,8 +10,7 @@ import {
 } from 'react-plaid-link';
 
 const Link = () => {
-  const link_token = localStorage.getItem("link_token");
-
+  const link_token = localStorage.getItem('link_token');
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>((publicToken, metadata) => {
     // send public_token to your server
@@ -21,14 +19,11 @@ const Link = () => {
 
     // Exchange the token
     const exchangeToken = async () => {
-      const response = await axios.post(
-        '/api/plaid/exchange_token', {
-          'publicToken': publicToken
-        }
-      )
+      const response = await axios.post('/api/plaid/exchange_token', {
+        publicToken: publicToken,
+      });
     };
     exchangeToken();
-
   }, []);
   const onEvent = useCallback<PlaidLinkOnEvent>((eventName, metadata) => {
     // log onEvent callbacks from Link
@@ -59,7 +54,4 @@ const Link = () => {
   return <></>;
 };
 
-export default Link
-
-
-
+export default Link;
